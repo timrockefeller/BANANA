@@ -20,7 +20,9 @@
 - 可选基于Eclipse平台开发编辑器插件（注意，Eclipse本身是跨平台的），开发工具：Xtext。
 
 #### 开发使用
-[分工表](docs/contributingPlan.md)
+[分工表](docs/week1/contributingPlan.md)
+[时间表](docs/week1/schedule.md)
+[需求分析报告](docs/week2/requirements.md)
 
 #### 软件架构
 软件架构说明
