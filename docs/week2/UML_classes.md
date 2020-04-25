@@ -75,7 +75,27 @@ class TextBuffer{
 
 ### Rendered Text 渲染后结果
 
+参照已有样本将代码内容分为类似如下若干种类，为每一种配置颜色。即可支持改变主题等自定义操作。
 
+```
+"workbench.colorCustomizations": {
+    "[Visual Studio Dark]": {
+        "syntax.type": "#26A69A",
+        "syntax.scope": "#00897B",
+        "syntax.function": "#00BCD4",
+        "syntax.variable": "#42A5F5",
+        "syntax.number": "#90A4AE",
+        "syntax.string": "#90A4AE",
+        "syntax.comment": "#546E7A",
+        "syntax.constant": "#A89F9B",
+        "syntax.directive": "#7E57C2",
+        "syntax.control": "#7986CB",
+        "syntax.operator": "#9575CD",
+        "syntax.modifier": "#00897B",
+        "syntax.punctuation": "#A1887F",
+    }
+},
+```
 
 ### Template
 
