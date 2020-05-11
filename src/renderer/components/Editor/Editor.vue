@@ -30,7 +30,7 @@ export default {
   methods: {
     mouseEvent: function (e) {
       this.inserterPosX = e.offsetX
-      this.inserterPosY = e.offsetY
+      this.inserterPosY = Math.floor(e.offsetY / 15) * 15
       this.$refs.inserter.focus()
     }
   }
@@ -44,6 +44,7 @@ export default {
   height:70em;
   left:0;
   background: rgb(255, 255, 215);
+  font-size: 15px;
 }
 #editor-inserter{
   position:relative;
