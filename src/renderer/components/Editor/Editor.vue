@@ -1,10 +1,11 @@
 <template>
   <div class="editor-frame">
-    <div class="text-browser" @click="mouseEvent">
+    <div class="text-browser" ref="innertext" @click="mouseEvent">
       Sample Text <span style="color:#F00" >Like We Have</span> Sun Shine!
     </div>
     <textarea 
       id="editor-inserter"
+      v-model="keyput"
       ref="inserter"
       v-if="onfocus"
       :style="inserterStyle"
@@ -25,6 +26,16 @@ export default {
   computed: {
     inserterStyle () {
       return 'top:' + this.inserterPosY + 'px;left:' + this.inserterPosX + 'px'
+    },
+    keyput: {
+      get () {
+        return ''
+      },
+      set (value) {
+        // TODO backspace & so on
+        this.$refs.innertext.append(value)
+        this.$refs.inserter.value = ''
+      }
     }
   },
   methods: {
@@ -38,22 +49,32 @@ export default {
 </script>
 
 <style>
+.editor-frame{
+    margin:0
+}
+
 .text-browser{
   position:absolute;
   width:100%;
   height:70em;
+  top:0;
   left:0;
   background: rgb(255, 255, 215);
   font-size: 15px;
+  cursor: text;
 }
+
 #editor-inserter{
   position:relative;
-  outline:none; 
+  outline:none;
   resize:none; 
-  background:transparent; 
-  border-color:transparent;
+  background:none;
+  padding:0;
+  border:none;
   overflow-y:hidden;
   overflow-x:hidden;
   caret-color: #FA0560;
+  height:15px;
+  width:2px;
 }
 </style>

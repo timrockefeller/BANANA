@@ -12,4 +12,7 @@
 
 <style>
   /* CSS */
+  body{
+      margin:0;
+  }
 </style>
