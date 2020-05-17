@@ -9,7 +9,7 @@
   </main>
 </template>
 
-<script>
+<script lang="ts">
 import Editor from './Editor/Editor.vue'
 
 export default {

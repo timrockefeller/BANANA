@@ -10,7 +10,7 @@ const MinifyPlugin = require("babel-minify-webpack-plugin")
 
 let mainConfig = {
   entry: {
-    main: path.join(__dirname, '../src/main/index.js')
+    main: path.join(__dirname, '../src/main/index.ts')
   },
   externals: [
     ...Object.keys(dependencies || {})
@@ -28,6 +28,15 @@ let mainConfig = {
     //       }
     //     }
     //   },
+      {
+        test: /\.ts$/,
+        use: {
+        loader: "ts-loader",
+        options: {
+           appendTsSuffixTo: [/\.vue$/],
+          }
+        }
+      },
       {
         test: /\.js$/,
         use: 'babel-loader',
@@ -52,7 +61,7 @@ let mainConfig = {
     new webpack.NoEmitOnErrorsPlugin()
   ],
   resolve: {
-    extensions: ['.js', '.json', '.node']
+    extensions: ['.ts', '.js', '.json', '.node']
   },
   target: 'electron-main'
 }
