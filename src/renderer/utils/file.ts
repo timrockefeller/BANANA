@@ -1,14 +1,24 @@
 /**
  * File Importer
  */
+const fs = require("fs")
 
-enum LanguageType { 
+enum LanguageType {
     "c",
     "cpp",
     "python",
     "javascript"
 }
-class FileContent extends File {
+class FileContent {
+    constructor(filePath:string) {
+        fs.readFile(filePath, (err : ExceptionInformation, _data:string) => {
+            if(err)
+                console.log(err);
+            // TODO fix \n bug
+            this.data = _data.toString();
+        })
+    }
+    public data: string = "";
     /**
      * getLanguageType
      */
@@ -16,3 +26,6 @@ class FileContent extends File {
         return LanguageType.javascript
     }
 }
+
+
+export { FileContent }

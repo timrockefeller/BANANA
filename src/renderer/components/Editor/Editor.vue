@@ -1,12 +1,13 @@
 <template>
   <div class="editor-frame">
     <div class="text-browser" ref="innertext" @click="mouseEvent">
-      <div>
+      <!-- <div>
       Sample Text <span class="mtk8" >Like We Have</span> Sun Shine!
       </div>
       <div>
       Multilline Text <span class="mtk6" >Test Chamber</span>.
-      </div>
+      </div> -->
+      {{file.data}}
     </div>
     <textarea 
       id="editor-inserter"
@@ -20,10 +21,12 @@
 
 <script lang="ts">
 import {Vue, Prop, Component} from 'vue-property-decorator'
+import {FileContent} from '../../utils/file'
 
 @Component
 export default class Editor extends Vue {
   @Prop(String) name : String = 'editor-page';
+  @Prop(FileContent) file:FileContent = new FileContent('./test.py');
   inserterPosX: Number = 0;
   inserterPosY: Number = 0;
   onfocus: Boolean = true;
