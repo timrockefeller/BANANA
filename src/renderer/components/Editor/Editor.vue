@@ -10,7 +10,7 @@
      
       <ol>
       
-      <li v-for="(dat, key) in file.data" :key="key">{{ dat }}</li>
+      <li v-for="(dat, key) in file.data" :key="key">{{ parsetext(dat) }}</li>
     
       </ol>
     </div>
@@ -54,6 +54,9 @@ export default class Editor extends Vue {
     this.inserterPosY = Math.floor(e.offsetY / 17) * 17 + 1
     let elInserter:any = this.$refs.inserter
     elInserter.focus()
+  }
+  parsetext (ori:string) {
+    return ori.replace(/\s/g, '&nbsp;')
   }
 }
 </script>

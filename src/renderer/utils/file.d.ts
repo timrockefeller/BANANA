@@ -6,7 +6,7 @@ declare enum LanguageType {
 }
 declare class FileContent {
     constructor(filePath: string);
-    data: string;
+    data: Array<string>;
     /**
      * getLanguageType
      */
