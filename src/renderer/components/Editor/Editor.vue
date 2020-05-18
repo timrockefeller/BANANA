@@ -8,11 +8,7 @@
       Multilline Text <span class="mtk6" >Test Chamber</span>.
       </div> -->
      
-      <ol>
-      
-      <li v-for="(dat, key) in file.data" :key="key">{{ parsetext(dat) }}</li>
-    
-      </ol>
+      <ol><li v-for="(dat, key) in file.data" :key="key" v-html="parsetext(dat)"></li></ol>
     </div>
     <textarea 
       id="editor-inserter"
