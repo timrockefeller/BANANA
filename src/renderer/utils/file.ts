@@ -15,10 +15,11 @@ class FileContent {
             if(err)
                 console.log(err);
             // TODO fix \n bug
-            this.data = _data.toString();
+            this.data = _data.toString().split("\n");
         })
     }
-    public data: string = "";
+    public data: Array<string> = [];
+
     /**
      * getLanguageType
      */

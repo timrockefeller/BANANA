@@ -7,7 +7,12 @@
       <div>
       Multilline Text <span class="mtk6" >Test Chamber</span>.
       </div> -->
-      {{file.data}}
+     
+      <ol>
+      
+      <li v-for="(dat, key) in file.data" :key="key">{{ dat }}</li>
+    
+      </ol>
     </div>
     <textarea 
       id="editor-inserter"
@@ -84,5 +89,12 @@ export default class Editor extends Vue {
   caret-color: #FA0560;
   height:15px;
   width:2px;
+}
+ol{list-style-type:none;counter-reset:sectioncounter;}
+
+ol li:before {
+       color:rgb(60, 61, 83);
+       content:counter(sectioncounter) " "; 
+       counter-increment:sectioncounter;
 }
 </style>
