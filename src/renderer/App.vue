@@ -6,10 +6,13 @@
 
 <script>
   export default {
-    name: 'banana'
+    name: 'BANANA CODE EDITOR'
   }
 </script>
 
 <style>
   /* CSS */
+  body{
+      margin:0;
+  }
 </style>

@@ -1,0 +1,82 @@
+// GLOBAL STYLE
+
+$global-font : 'Fira Code', 'Source Code Pro for Powerline', 'Source Han Sans CN', '苹方', 'Meslo for Powerline', Consolas, 'Courier New', monospace;
+$global-white : #FFF;
+
+$editor-curse: #FA0560;
+// EDITOR THEME
+.mtk1 { color: #333333; }
+.mtk2 { color: #fdf6e3; }
+.mtk3 { color: #93a1a1; }
+.mtk4 { color: #bbbbbb; }
+.mtk5 { color: #d33682; }
+.mtk6 { color: #b58900; }
+.mtk7 { color: #657b83; }
+.mtk8 { color: #dc322f; }
+.mtk9 { color: #6c71c4; }
+.mtk10 { color: #2aa198; }
+.mtk11 { color: #cf4b56; }
+.mtk12 { color: #268bd2; }
+.mtk13 { color: #cb4b16; }
+.mtk14 { color: #859900; }
+.mtk15 { color: #7f2a1d; }
+.mtk16 { color: rgba(220, 50, 47, 0.75); }
+.mtk17 { color: rgba(38, 139, 210, 0.75); }
+.mtk18 { color: rgba(181, 137, 0, 0.75); }
+.mtk19 { color: rgba(108, 113, 196, 0.75); }
+.mtk20 { color: rgba(101, 123, 131, 0.8); }
+.mtk21 { color: rgba(0, 0, 0, 0.03); }
+.mtk22 { color: rgba(0, 0, 0, 0.31); }
+.mtk23 { color: rgba(0, 0, 0, 0.09); }
+.mtk24 { color: rgba(100, 78, 160, 0.31); }
+.mtk25 { color: rgba(100, 78, 160, 0.08); }
+.mtk26 { color: rgba(100, 78, 160, 0.46); }
+.mtk27 { color: #644ea0; }
+.mtk28 { color: rgba(100, 78, 160, 0.14); }
+.mtk29 { color: rgba(100, 78, 160, 0.21); }
+.mtk30 { color: rgba(38, 139, 210, 0.31); }
+.mtk31 { color: rgba(38, 139, 210, 0.08); }
+.mtk32 { color: rgba(38, 139, 210, 0.46); }
+.mtk33 { color: rgba(38, 139, 210, 0.14); }
+.mtk34 { color: rgba(38, 139, 210, 0.21); }
+.mtk35 { color: rgba(181, 137, 0, 0.31); }
+.mtk36 { color: rgba(181, 137, 0, 0.08); }
+.mtk37 { color: rgba(181, 137, 0, 0.46); }
+.mtk38 { color: rgba(181, 137, 0, 0.14); }
+.mtk39 { color: rgba(181, 137, 0, 0.21); }
+.mtk40 { color: rgba(220, 50, 47, 0.31); }
+.mtk41 { color: rgba(220, 50, 47, 0.08); }
+.mtk42 { color: rgba(220, 50, 47, 0.46); }
+.mtk43 { color: rgba(220, 50, 47, 0.14); }
+.mtk44 { color: rgba(220, 50, 47, 0.21); }
+.mtk45 { color: rgba(133, 153, 0, 0.31); }
+.mtk46 { color: rgba(133, 153, 0, 0.08); }
+.mtk47 { color: rgba(133, 153, 0, 0.46); }
+.mtk48 { color: rgba(133, 153, 0, 0.14); }
+.mtk49 { color: rgba(133, 153, 0, 0.21); }
+.mtk50 { color: #ffffff; }
+.mtk51 { color: #528bff; }
+.mtk52 { color: #316bcd; }
+.mtk53 { color: #cd9731; }
+.mtk54 { color: #cd3131; }
+.mtk55 { color: #800080; }
+.mtki { font-style: italic; }
+.mtkb { font-weight: bold; }
+.mtku { text-decoration: underline; text-underline-position: under; }
+
+
+// ANIMATIONS
+@keyframes twinkling{
+    0%{
+        opacity: 0;
+    }
+    49%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+    99%{
+        opacity: 1;
+    }
+}
