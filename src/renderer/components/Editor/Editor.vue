@@ -13,38 +13,35 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'editor-page',
-  data () {
-    return {
-      inserterPosX: 0,
-      inserterPosY: 0,
-      onfocus: true
+<script lang="ts">
+import {Vue, Component} from 'vue-property-decorator'
+
+@Component({
+  name: 'editor-page'
+})
+export default class Editor extends Vue {
+    inserterPosX:Number = 0
+    inserterPosY:Number = 0
+    onfocus:Boolean = true
+    get keyput () {
+      return ''
     }
-  },
-  computed: {
-    inserterStyle () {
+    set keyput (value:String) {
+      // TODO backspace & so on
+      let elInnertext: any = this.$refs.innertext
+      let elInserter: any = this.$refs.inserter
+      elInnertext.append(value)
+      elInserter.value = ''
+    }
+    get inserterStyle () {
       return 'top:' + this.inserterPosY + 'px;left:' + this.inserterPosX + 'px'
-    },
-    keyput: {
-      get () {
-        return ''
-      },
-      set (value) {
-        // TODO backspace & so on
-        this.$refs.innertext.append(value)
-        this.$refs.inserter.value = ''
-      }
     }
-  },
-  methods: {
-    mouseEvent: function (e) {
+    mouseEvent (e:MouseEvent):void {
       this.inserterPosX = e.offsetX
       this.inserterPosY = Math.floor(e.offsetY / 15) * 15
-      this.$refs.inserter.focus()
+      let elInserter:any = this.$refs.inserter
+      elInserter.focus()
     }
-  }
 }
 </script>
 

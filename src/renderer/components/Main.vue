@@ -10,11 +10,18 @@
 </template>
 
 <script lang="ts">
+import {Vue, Component} from 'vue-property-decorator'
 import Editor from './Editor/Editor.vue'
-
-export default {
+@Component({
   name: 'top',
-  components: { Editor }
+  components: {
+    'Editor': Editor
+  }
+})
+
+export default class App extends Vue {
+  created () {
+  }
 }
 </script>
 
