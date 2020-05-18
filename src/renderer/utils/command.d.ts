@@ -1,14 +1,4 @@
-interface Command {
-    execute(): void;
-}
-declare class EventBus {
-    /**
-     * bind
-     */
-    bind(): void;
-}
-declare module 'vue/types/vue' {
-    interface VueConstructor {
-        $event: EventBus;
-    }
-}
+declare const _default: {
+    install: (Vue: any, _options: any) => void;
+};
+export default _default;
