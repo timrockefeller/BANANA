@@ -90,4 +90,11 @@ export default class Editor extends Vue {
   height:15px;
   width:2px;
 }
+ol{list-style-type:none;counter-reset:sectioncounter;}
+
+ol li:before {
+       color:rgb(60, 61, 83);
+       content:counter(sectioncounter) " "; 
+       counter-increment:sectioncounter;
+}
 </style>
