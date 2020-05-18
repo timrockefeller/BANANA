@@ -7,7 +7,12 @@
       <div>
       Multilline Text <span class="mtk6" >Test Chamber</span>.
       </div> -->
-      {{file.data}}
+     
+      <ol>
+      
+      <li v-for="(dat, key) in file.data" :key="key">{{ dat }}</li>
+    
+      </ol>
     </div>
     <textarea 
       id="editor-inserter"
