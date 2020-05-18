@@ -8,14 +8,14 @@
           <Menubar></Menubar>
         </fieldset>
       </div>
-      <div style="float:left">
-        <fieldset style="border-width: 1px; border-color: #bbbbbb; width:250px; height:1000px; ">
+      <div style="float:left;  width:25% ">
+        <fieldset style="border-width: 1px; border-color: #bbbbbb; height:1000px;">
           <legend>文件夹</legend>
           <Filetree ></Filetree>
         </fieldset>
       </div>
-      <div style="float:right">
-        <fieldset style="border-width: 1px; border-color: #bbbbbb; width:1200px; height:1000px; ">
+      <div style="float:right; width:75%">
+        <fieldset style="border-width: 1px; border-color: #bbbbbb;  height:1000px">
           <legend>编辑区</legend>
           <editor></editor>
         </fieldset>
