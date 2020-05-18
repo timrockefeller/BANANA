@@ -60,7 +60,7 @@ export default class Editor extends Vue {
 }
 
 .text-browser{
-  position:absolute;
+  position:relative;
   width:100%;
   height:70em;
   top:0;
