@@ -2,26 +2,21 @@
   <main>
     <!-- Menu Bar -->
 
-    <editor></editor>
-
+    <!--editor></editor-->
+    <quill></quill>
     <!-- Process Bar -->
-      
+
   </main>
 </template>
 
-<script lang="ts">
-import {Vue, Component} from 'vue-property-decorator'
-import Editor from './Editor/Editor.vue'
-@Component({
+<script>
+//import Editor from './Editor/Editor.vue'
+import Quill from 'quill'
+import quill from 'quill/quill.js'
+Quill.register('quill/quill', quill)
+export default {
   name: 'top',
-  components: {
-    'Editor': Editor
-  }
-})
-
-export default class App extends Vue {
-  created () {
-  }
+  components: { quill }
 }
 </script>
 

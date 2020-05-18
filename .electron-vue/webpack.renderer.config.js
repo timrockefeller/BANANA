@@ -19,12 +19,12 @@ const { VueLoaderPlugin } = require('vue-loader')
  * that provide pure *.vue files that need compiling
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/webpack-configurations.html#white-listing-externals
  */
-let whiteListedModules = ['vue', 'vue-property-decorator']
+let whiteListedModules = ['vue']
 
 let rendererConfig = {
   devtool: '#cheap-module-eval-source-map',
   entry: {
-    renderer: path.join(__dirname, '../src/renderer/main.ts')
+    renderer: path.join(__dirname, '../src/renderer/main.js')
   },
   externals: [
     ...Object.keys(dependencies || {}).filter(d => !whiteListedModules.includes(d))
@@ -42,15 +42,6 @@ let rendererConfig = {
     //       }
     //     }
     //   },
-      {
-        test: /\.ts$/,
-        use: {
-        loader: "ts-loader",
-        options: {
-           appendTsSuffixTo: [/\.vue$/],
-          }
-        }
-      },
       {
         test: /\.scss$/,
         use: ['vue-style-loader', 'css-loader', 'sass-loader']
@@ -168,7 +159,7 @@ let rendererConfig = {
       '@': path.join(__dirname, '../src/renderer'),
       'vue$': 'vue/dist/vue.esm.js'
     },
-    extensions: ['.ts', '.js', '.vue', '.json', '.css', '.node']
+    extensions: ['.js', '.vue', '.json', '.css', '.node']
   },
   target: 'electron-renderer'
 }

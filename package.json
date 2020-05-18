@@ -56,13 +56,11 @@
     }
   },
   "dependencies": {
-    "axios": "^0.18.0",
     "vue": "^2.5.16",
+    "axios": "^0.18.0",
     "vue-electron": "^1.0.6",
-    "vue-property-decorator": "^8.4.2",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
-    "vuex-class": "^0.3.2",
     "vuex-electron": "^1.0.0"
   },
   "devDependencies": {
@@ -117,8 +115,6 @@
     "sass-loader": "^7.0.3",
     "spectron": "^3.8.0",
     "style-loader": "^0.21.0",
-    "ts-loader": "^7.0.4",
-    "typescript": "^3.9.2",
     "url-loader": "^1.0.1",
     "vue-html-loader": "^1.2.4",
     "vue-loader": "^15.2.4",

@@ -1,12 +1,7 @@
 <template>
   <div class="editor-frame">
     <div class="text-browser" ref="innertext" @click="mouseEvent">
-      <div>
-      Sample Text <span class="mtk8" >Like We Have</span> Sun Shine!
-      </div>
-      <div>
-      Multilline Text <span class="mtk6" >Test Chamber</span>.
-      </div>
+      Sample Text <span style="color:#F00" >Like We Have</span> Sun Shine!
     </div>
     <textarea 
       id="editor-inserter"
@@ -18,40 +13,42 @@
   </div>
 </template>
 
-<script lang="ts">
-import {Vue, Prop, Component} from 'vue-property-decorator'
-
-@Component
-export default class Editor extends Vue {
-  @Prop(String) name : String = 'editor-page';
-  inserterPosX: Number = 0;
-  inserterPosY: Number = 0;
-  onfocus: Boolean = true;
-
-  get keyput () {
-    return ''
-  }
-  set keyput (value:String) {
-    // TODO backspace & so on
-    let elInnertext: any = this.$refs.innertext
-    let elInserter: any = this.$refs.inserter
-    elInnertext.append(value)
-    elInserter.value = ''
-  }
-  get inserterStyle () {
-    return 'top:' + this.inserterPosY + 'px;left:' + this.inserterPosX + 'px'
-  }
-  mouseEvent (e:MouseEvent):void {
-    this.inserterPosX = e.offsetX
-    this.inserterPosY = Math.floor(e.offsetY / 17) * 17 + 1
-    let elInserter:any = this.$refs.inserter
-    elInserter.focus()
+<script>
+export default {
+  name: 'editor-page',
+  data () {
+    return {
+      inserterPosX: 0,
+      inserterPosY: 0,
+      onfocus: true
+    }
+  },
+  computed: {
+    inserterStyle () {
+      return 'top:' + this.inserterPosY + 'px;left:' + this.inserterPosX + 'px'
+    },
+    keyput: {
+      get () {
+        return ''
+      },
+      set (value) {
+        // TODO backspace & so on
+        this.$refs.innertext.append(value)
+        this.$refs.inserter.value = ''
+      }
+    }
+  },
+  methods: {
+    mouseEvent: function (e) {
+      this.inserterPosX = e.offsetX
+      this.inserterPosY = Math.floor(e.offsetY / 15) * 15
+      this.$refs.inserter.focus()
+    }
   }
 }
 </script>
 
-<style lang="scss">
-@import "~@/assets/scss/def.scss";
+<style>
 .editor-frame{
     margin:0
 }
@@ -62,10 +59,8 @@ export default class Editor extends Vue {
   height:70em;
   top:0;
   left:0;
-  font-family: $global-font;
-  background: $global-white;
+  background: rgb(255, 255, 215);
   font-size: 15px;
-  line-height: 17px;
   cursor: text;
 }
 
