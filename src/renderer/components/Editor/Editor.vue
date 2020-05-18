@@ -1,7 +1,10 @@
 <template>
   <div class="editor-frame">
-    <div class="text-browser" ref="innertext" @click="mouseEvent">
-      <ol><li v-for="(dat, key) in file.data" :key="key" v-html="parsetext(dat)"></li></ol>
+    <div class="text-browser" ref="innertext" @click="mouseEvent" >
+      <ol class="text-inner"><li v-for="(dat, key) in file.data" :key="key">
+          <div class="line-prefix">{{key+1}}</div>
+          <div class="line-text" v-html="parsetext(dat)"></div>
+          </li></ol>
       <div 
       id="editor-inserter"
       ref="inserter"
@@ -68,7 +71,9 @@ export default class Editor extends Vue {
   line-height: 17px;
   cursor: text;
 }
-
+.text-inner{
+    position: absolute;
+}
 #editor-inserter{
   position:relative;
   outline:none;
@@ -88,12 +93,17 @@ export default class Editor extends Vue {
 ol{
     list-style-type:none;
     counter-reset:sectioncounter;
-    padding:0 0;    
+    padding:0 0;
+    width: 100% 
 }
-
-ol li:before {
-       color:rgb(60, 61, 83);
-       content:counter(sectioncounter) " "; 
-       counter-increment:sectioncounter;
+.line-prefix{
+    display: inline-block;
+    width: 3em;
+    padding:0 2em;
+    text-align: right;
+    user-select: none;
+}
+.line-text{
+    display: inline-block;
 }
 </style>
