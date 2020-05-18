@@ -1,8 +1,8 @@
 <template>
-  <div class="editor-frame">
-    <div class="text-browser" ref="innertext" @click="mouseEvent" >
+  <div class="editor-frame"  @keydown.tab="tabEvent">
+    <div class="text-browser" ref="innertext" contenteditable="true" @click="mouseEvent">
       <ol class="text-inner"><li v-for="(dat, key) in file.data" :key="key">
-          <div class="line-prefix">{{key+1}}</div>
+          <div class="line-prefix" contenteditable="false">{{key+1}}</div>
           <div class="line-text" v-html="parsetext(dat)"></div>
           </li></ol>
       <div 
@@ -10,7 +10,7 @@
       ref="inserter"
       v-if="onfocus"
       :style="inserterStyle"
-      ></div>
+      style="display:none"></div>
     </div>
     
   </div>
@@ -44,8 +44,10 @@ export default class Editor extends Vue {
   mouseEvent (e:MouseEvent):void {
     this.inserterPosX = e.offsetX
     this.inserterPosY = Math.floor(e.offsetY / 17) * 17 + 1
-    let elInserter:any = this.$refs.inserter
-    elInserter.focus()
+  }
+  tabEvent (_e:KeyboardEvent):void {
+    let elInnertext:any = this.$refs.innertext
+    elInnertext.selectionStart = 0
   }
   parsetext (ori:string) {
     return ori.replace(/\s/g, '&nbsp;')

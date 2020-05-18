@@ -7,7 +7,7 @@
             <filetree></filetree>
         </div>
         <div slot="right" class="split-pane">
-            <editor></editor>
+            <editormirror></editormirror>
         </div>
     </Split>
     </div>
@@ -39,10 +39,11 @@
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator'
 import Editor from './Editor/Editor.vue'
+import Editormirror from './Editor/Editormirror.vue'
 import Filetree from './Filetree/Filetree.vue'
 import Menubar from './Menubar/Menubar.vue'
 @Component({
-  components: {Editor, Filetree, Menubar}
+  components: {Editor, Filetree, Menubar, Editormirror}
 })
 export default class App extends Vue {
   created () {
