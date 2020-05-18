@@ -1,15 +1,15 @@
-/**
- * File Importer
- */
 declare enum LanguageType {
     "c" = 0,
     "cpp" = 1,
     "python" = 2,
     "javascript" = 3
 }
-declare class FileContent extends File {
+declare class FileContent {
+    constructor(filePath: string);
+    data: string;
     /**
      * getLanguageType
      */
     getLanguageType(): LanguageType;
 }
+export { FileContent };
