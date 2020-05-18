@@ -1,22 +1,15 @@
 <template>
   <div class="editor-frame">
     <div class="text-browser" ref="innertext" @click="mouseEvent">
-      <!-- <div>
-      Sample Text <span class="mtk8" >Like We Have</span> Sun Shine!
-      </div>
-      <div>
-      Multilline Text <span class="mtk6" >Test Chamber</span>.
-      </div> -->
-     
       <ol><li v-for="(dat, key) in file.data" :key="key" v-html="parsetext(dat)"></li></ol>
-    </div>
-    <textarea 
+      <div 
       id="editor-inserter"
-      v-model="keyput"
       ref="inserter"
       v-if="onfocus"
       :style="inserterStyle"
-    ></textarea>
+      ></div>
+    </div>
+    
   </div>
 </template>
 
@@ -85,11 +78,18 @@ export default class Editor extends Vue {
   border:none;
   overflow-y:hidden;
   overflow-x:hidden;
-  caret-color: #FA0560;
+  background: $editor-curse;
   height:15px;
-  width:2px;
+  width:1px;
+  animation-name: twinkling;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
 }
-ol{list-style-type:none;counter-reset:sectioncounter;}
+ol{
+    list-style-type:none;
+    counter-reset:sectioncounter;
+    padding:0 0;    
+}
 
 ol li:before {
        color:rgb(60, 61, 83);

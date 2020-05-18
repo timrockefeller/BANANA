@@ -3,6 +3,7 @@
 $global-font : 'Fira Code', 'Source Code Pro for Powerline', 'Source Han Sans CN', '苹方', 'Meslo for Powerline', Consolas, 'Courier New', monospace;
 $global-white : #FFF;
 
+$editor-curse: #FA0560;
 // EDITOR THEME
 .mtk1 { color: #333333; }
 .mtk2 { color: #fdf6e3; }
@@ -62,3 +63,20 @@ $global-white : #FFF;
 .mtki { font-style: italic; }
 .mtkb { font-weight: bold; }
 .mtku { text-decoration: underline; text-underline-position: under; }
+
+
+// ANIMATIONS
+@keyframes twinkling{
+    0%{
+        opacity: 0;
+    }
+    49%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+    99%{
+        opacity: 1;
+    }
+}
