@@ -1,7 +1,12 @@
 <template>
   <div class="editor-frame">
     <div class="text-browser" ref="innertext" @click="mouseEvent">
-      Sample Text <span style="color:#F00" >Like We Have</span> Sun Shine!
+      <div>
+      Sample Text <span class="mtk8" >Like We Have</span> Sun Shine!
+      </div>
+      <div>
+      Multilline Text <span class="mtk6" >Test Chamber</span>.
+      </div>
     </div>
     <textarea 
       id="editor-inserter"
@@ -14,38 +19,39 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component} from 'vue-property-decorator'
+import {Vue, Prop, Component} from 'vue-property-decorator'
 
-@Component({
-  name: 'editor-page'
-})
+@Component
 export default class Editor extends Vue {
-    inserterPosX:Number = 0
-    inserterPosY:Number = 0
-    onfocus:Boolean = true
-    get keyput () {
-      return ''
-    }
-    set keyput (value:String) {
-      // TODO backspace & so on
-      let elInnertext: any = this.$refs.innertext
-      let elInserter: any = this.$refs.inserter
-      elInnertext.append(value)
-      elInserter.value = ''
-    }
-    get inserterStyle () {
-      return 'top:' + this.inserterPosY + 'px;left:' + this.inserterPosX + 'px'
-    }
-    mouseEvent (e:MouseEvent):void {
-      this.inserterPosX = e.offsetX
-      this.inserterPosY = Math.floor(e.offsetY / 15) * 15
-      let elInserter:any = this.$refs.inserter
-      elInserter.focus()
-    }
+  @Prop(String) name : String = 'editor-page';
+  inserterPosX: Number = 0;
+  inserterPosY: Number = 0;
+  onfocus: Boolean = true;
+
+  get keyput () {
+    return ''
+  }
+  set keyput (value:String) {
+    // TODO backspace & so on
+    let elInnertext: any = this.$refs.innertext
+    let elInserter: any = this.$refs.inserter
+    elInnertext.append(value)
+    elInserter.value = ''
+  }
+  get inserterStyle () {
+    return 'top:' + this.inserterPosY + 'px;left:' + this.inserterPosX + 'px'
+  }
+  mouseEvent (e:MouseEvent):void {
+    this.inserterPosX = e.offsetX
+    this.inserterPosY = Math.floor(e.offsetY / 17) * 17 + 1
+    let elInserter:any = this.$refs.inserter
+    elInserter.focus()
+  }
 }
 </script>
 
-<style>
+<style lang="scss">
+@import "~@/assets/scss/def.scss";
 .editor-frame{
     margin:0
 }
@@ -56,8 +62,10 @@ export default class Editor extends Vue {
   height:70em;
   top:0;
   left:0;
-  background: rgb(255, 255, 215);
+  font-family: $global-font;
+  background: $global-white;
   font-size: 15px;
+  line-height: 17px;
   cursor: text;
 }
 
