@@ -23,10 +23,10 @@ Vue.config.productionTip = false
 
 Vue.use(event)
 Vue.use(iView);
-Vue.use(VueCodemirror, /* {
-    options: { theme: 'base16-dark', ... },
-    events: ['scroll', ...]
-  } */)
+Vue.use(VueCodemirror/*,{
+    options: { theme: 'base16-dark'},
+    events: ['scroll']
+  }*/)
 /* eslint-disable no-new */
 new Vue({
   components: { App },

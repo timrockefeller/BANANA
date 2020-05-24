@@ -13,8 +13,18 @@ import { codemirror } from 'vue-codemirror'
 import {FileContent} from '../../utils/file'
 // import base style
 import 'codemirror/lib/codemirror.css'
-
 // import more codemirror resource...
+import 'codemirror/mode/javascript/javascript.js'
+import 'codemirror/addon/fold/foldcode.js'
+import 'codemirror/addon/fold/foldgutter.js'
+import 'codemirror/addon/fold/brace-fold.js'
+import 'codemirror/addon/fold/xml-fold.js'
+import 'codemirror/addon/fold/indent-fold.js'
+import 'codemirror/addon/fold/markdown-fold.js'
+import 'codemirror/addon/fold/comment-fold.js'
+import 'codemirror/addon/hint/show-hint.css'
+import 'codemirror/addon/hint/show-hint.js'
+import 'codemirror/addon/hint/javascript-hint.js'
 
 @Component({
   components: {
@@ -25,8 +35,8 @@ export default class Editormirror extends Vue {
     file:FileContent = new FileContent('./test.py');
     cmOptions = {
       tabSize: 4,
-      mode: 'python',
-      theme: '3024-day',
+      mode: 'text/javascript',
+      theme: 'duotone-light',
       lineNumbers: true,
       line: true
       // more CodeMirror options...
@@ -46,6 +56,9 @@ export default class Editormirror extends Vue {
 }
 </script>
 
-<style>
-
+<style lang='scss'>
+@import "~@/assets/scss/code-theme/duotone-light.css";
+.vue-codemirror, .CodeMirror{
+    height:100%;
+}
 </style>
