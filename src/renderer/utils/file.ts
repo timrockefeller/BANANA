@@ -37,9 +37,9 @@ const EncodeType: Array<string> = [
 class FileContent {
     constructor(filePath: string) {
         this.onCreate(filePath);
+        this.loadData()
     }
     onCreate(filePath: string) {
-        // TODO : parse file suffix
         this.language = LanguageType.getLang(filePath.substr(filePath.lastIndexOf('.') + 1))
         this.path = pt.resolve(filePath);
         this.encoding = EncodeType[0]
