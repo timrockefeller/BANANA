@@ -2,30 +2,53 @@
  * File Importer
  */
 const fs = require("fs")
-
-enum LanguageType {
-    "c",
-    "cpp",
-    "python",
-    "javascript"
+const pt = require("path")
+/**
+ * Suffix Defines
+ */
+class SuffixPare {
+    constructor(_language: string, ..._suffixes: Array<string>) {
+        this.language = _language
+        this.suffixes = _suffixes
+    }
+    language: string = ""
+    suffixes: string[] = []
 }
+const LanguageType: any = {
+    getLang(_suffix: string): string {
+        for (let sufp of this.langPare) {
+            for (let suf of sufp.suffixes) {
+                if (_suffix.localeCompare(suf) === 0) {
+                    return sufp.language;
+                }
+            }
+        }
+        return ''
+    },
+    langPare: [
+        new SuffixPare('python', 'py'),
+        new SuffixPare('javascript', 'js'),
+        new SuffixPare('cpp', 'cpp', 'hpp', 'c', 'h')
+    ]
+}
+const EncodeType: Array<string> = [
+    "utf-8"
+]
 class FileContent {
-    constructor(filePath:string) {
-        fs.readFile(filePath, (err : ExceptionInformation, _data:string) => {
-            if(err)
-                console.log(err);
-            // TODO fix \n bug
-            this.data = _data.toString().split("\n");
-        })
+    constructor(filePath: string) {
+        this.onCreate(filePath);
     }
-    public data: Array<string> = [];
+    onCreate(filePath: string) {
+        // TODO : parse file suffix
+        this.language = LanguageType.getLang(filePath.substr(filePath.lastIndexOf('.') + 1))
+        this.path = pt.resolve(filePath);
+        this.data = fs.readFileSync(filePath).toString();
+    }
+    public path: string = '';
+    public encoding = EncodeType[0]
+    public data: string = '';
+    public language: string = LanguageType.getLang('')
 
-    /**
-     * getLanguageType
-     */
-    public getLanguageType(): LanguageType {
-        return LanguageType.javascript
-    }
 }
 
 

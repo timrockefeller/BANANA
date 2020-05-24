@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Prop, Component} from 'vue-property-decorator'
+import {Vue, Component} from 'vue-property-decorator'
 import { codemirror } from 'vue-codemirror'
 import {FileContent} from '../../utils/file'
 // import base style
@@ -22,7 +22,7 @@ import 'codemirror/lib/codemirror.css'
   }
 })
 export default class Editormirror extends Vue {
-    @Prop(FileContent) file:FileContent = new FileContent('./test.py');
+    file:FileContent = new FileContent('./test.py');
     cmOptions = {
       tabSize: 4,
       mode: 'python',
@@ -31,13 +31,16 @@ export default class Editormirror extends Vue {
       line: true
       // more CodeMirror options...
     }
-    code:string='const i=0;';
-    get codemirror ():any {
+    code:string='const';
+    get codemirror ():Vue | Element | Vue[] | Element[] {
       return this.$refs.cmEditor
     }
-    created () {
+    mounted ():void {
+      this.file = new FileContent('./test.py')
+      this.code = this.file.data
+      this.cmOptions.mode = this.file.language
     }
-    onCmCodeChange (_val:string) {
+    onCmCodeChange (_val:string):void {
       this.code = _val
     }
 }
