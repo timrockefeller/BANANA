@@ -15,6 +15,7 @@ import {FileContent} from '../../utils/file'
 import 'codemirror/lib/codemirror.css'
 // import more codemirror resource...
 import 'codemirror/mode/javascript/javascript.js'
+import 'codemirror/mode/python/python.js'
 import 'codemirror/addon/fold/foldcode.js'
 import 'codemirror/addon/fold/foldgutter.js'
 import 'codemirror/addon/fold/brace-fold.js'
@@ -38,7 +39,8 @@ export default class Editormirror extends Vue {
       mode: 'text/javascript',
       theme: 'duotone-light',
       lineNumbers: true,
-      line: true
+      line: true,
+      styleActiveLine: true
       // more CodeMirror options...
     }
     code:string='const';
@@ -58,7 +60,10 @@ export default class Editormirror extends Vue {
 
 <style lang='scss'>
 @import "~@/assets/scss/code-theme/duotone-light.css";
+@import "~@/assets/scss/def.scss";
 .vue-codemirror, .CodeMirror{
     height:100%;
+    font-family: $global-font;
+    font-size: 16px;
 }
 </style>

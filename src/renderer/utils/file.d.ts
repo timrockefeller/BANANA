@@ -1,16 +1,9 @@
-declare enum LanguageType {
-    "c" = 0,
-    "cpp" = 1,
-    "python" = 2,
-    "javascript" = 3
-}
 declare class FileContent {
     constructor(filePath: string);
+    onCreate(filePath: string): void;
     path: string;
+    encoding: string;
     data: string;
-    /**
-     * getLanguageType
-     */
-    getLanguageType(): LanguageType;
+    language: string;
 }
 export { FileContent };

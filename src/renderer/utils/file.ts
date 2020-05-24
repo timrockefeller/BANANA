@@ -27,7 +27,7 @@ const LanguageType: any = {
     },
     langPare: [
         new SuffixPare('python', 'py'),
-        new SuffixPare('javascript', 'js'),
+        new SuffixPare('javascript', 'js', 'json'),
         new SuffixPare('cpp', 'cpp', 'hpp', 'c', 'h')
     ]
 }
@@ -42,13 +42,22 @@ class FileContent {
         // TODO : parse file suffix
         this.language = LanguageType.getLang(filePath.substr(filePath.lastIndexOf('.') + 1))
         this.path = pt.resolve(filePath);
-        this.data = fs.readFileSync(filePath).toString();
+        this.encoding = EncodeType[0]
     }
+
+    loadData() {
+        this.data = fs.readFileSync(this.path, { encoding: this.encoding }).toString();
+    }
+
     public path: string = '';
     public encoding = EncodeType[0]
     public data: string = '';
     public language: string = LanguageType.getLang('')
 
+    onSave() {
+        if (this.path != null)
+            fs.writeFileSync(this.path, this.data, { encoding: this.encoding });
+    }
 }
 
 
