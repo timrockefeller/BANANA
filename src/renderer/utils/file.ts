@@ -42,6 +42,7 @@ class FileContent {
     onCreate(filePath: string) {
         this.language = LanguageType.getLang(filePath.substr(filePath.lastIndexOf('.') + 1))
         this.path = pt.resolve(filePath);
+        // FIXME 猜测编码？
         this.encoding = EncodeType[0]
     }
 

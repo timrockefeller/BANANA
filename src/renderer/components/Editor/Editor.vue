@@ -32,7 +32,7 @@ export default class Editor extends Vue {
     return ''
   }
   set keyput (value:String) {
-    // TODO backspace & so on
+    // T/O/D/O DEPRECATED backspace & so on
     let elInnertext: any = this.$refs.innertext
     let elInserter: any = this.$refs.inserter
     elInnertext.append(value)

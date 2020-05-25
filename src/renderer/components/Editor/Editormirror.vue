@@ -1,4 +1,6 @@
 <template>
+<!-- TODO 多标签？
+    需要把props整合到上一级 -->
   <codemirror
   ref="cmEditor"
   v-model="code"
@@ -51,6 +53,7 @@ export default class Editormirror extends Vue {
       this.file = new FileContent('./test.py')
       this.code = this.file.data
       this.cmOptions.mode = this.file.language
+      // FIXME 这咋没有高亮？
     }
     onCmCodeChange (_val:string):void {
       this.code = _val

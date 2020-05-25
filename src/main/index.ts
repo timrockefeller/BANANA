@@ -33,6 +33,12 @@ function createWindow () {
     mainWindow = null
   })
 }
+/**
+ * TODO 添加更多菜单
+ * 文件->打开/保存
+ * 查查怎么从主进程往vue渲染进程里传事件
+ */
+
 
 app.on('ready', createWindow)
 
