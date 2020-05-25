@@ -25,38 +25,57 @@ function createMenu() {
     const menuTemplate = [{
       label: '文件',
       submenu: [{
-        label: '新建文件'
+        label: '新建'
+
       },
       {
-        label: '打开文件'
+        label: '打开'
       },
       {
-        label: '保存文件'
+        label: '保存'
       },
       {
-        label: '退出'
+        label: '另存为...'
+      },
+      {
+        label: '退出',
+        role:'quit'
       }
       ]
     },
     {
       label: '编辑',
       submenu: [{
-        label: '撤销'
+        label: '撤销',
+        role:'undo'
       },
       {
-        label: '重做'
+        label: '重做',
+        role:'redo'
       },
       {
-        label: '剪切'
+        label: '剪切',
+        role:'cut'
       },
       {
-        label: '复制'
+        label: '复制',
+        role:'copy'
       },
       {
-        label: '粘贴'
+        label: '粘贴',
+        role:'paste'
+      },
+      {
+        label: '全选',
+        role:'selectall'
+      },
+      {
+        label: '删除',
+        role:'delete'
       },
       {
         label: '查找...'
+        
       },
       {
         label: '替换...'
@@ -73,6 +92,34 @@ function createMenu() {
       },
       {
         label: '显示/隐藏工具栏'
+      },
+      {
+        label: '重新载入页面',
+        role:'reload'
+      },
+      {
+        label: '放大页面',
+        role:'zoomin'
+      },
+      {
+        label: '缩小页面',
+        role:'zoomout'
+      },
+      {
+        label: '缩小页面',
+        role:'zoomout'
+      },
+      {
+        label: '还原初始页面',
+        role:'resetzoom'
+      },
+      {
+        label: '全屏',
+        role:'togglefullscreen'
+      },
+      {
+        label: '开发者模式',
+        role:'toggledevtools'
       }
       ]
     },
@@ -95,13 +142,16 @@ function createMenu() {
     {
       label: '帮助',
       submenu: [{
-        label: '关于'
+        label: '关于',
+        role:'about'
       },
       {
-        label: '用户手册'
+        label: '用户手册',
+        role:'help'
       },
       {
         label: '网站'
+
       }
       ]
     }
@@ -132,7 +182,7 @@ function createWindow () {
 }
 
 app.on('ready', createWindow)
-app.on('ready',createMenu)
+app.on('ready', createMenu)
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
