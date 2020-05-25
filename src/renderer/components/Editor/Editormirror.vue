@@ -11,14 +11,13 @@
 
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator'
-import { codemirror } from 'vue-codemirror'
 import {FileContent} from '../../utils/file'
 // import base style
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/duotone-light.css'
 // language
 import 'codemirror/mode/javascript/javascript.js'
-// import 'codemirror/mode/python/python.js'
+import 'codemirror/mode/python/python.js'
 // require active-line.js
 import 'codemirror/addon/selection/active-line.js'
 // styleSelectedText
@@ -52,6 +51,8 @@ import 'codemirror/addon/fold/indent-fold.js'
 import 'codemirror/addon/fold/markdown-fold.js'
 import 'codemirror/addon/fold/xml-fold.js'
 
+const VueCodemirror = require('@/components/vue-codemirror')
+const codemirror = VueCodemirror.codemirror
 @Component({
   components: {
     codemirror
@@ -82,13 +83,12 @@ export default class Editormirror extends Vue {
     code:string='const int a;';
     get editor ():any {
       let edi:any = this.$refs.cmEditor
-      return edi
+      return edi.editor
     }
     mounted ():void {
-      this.file = new FileContent('./.eslintrc.js')
+      this.file = new FileContent('./test.py')
       this.code = this.file.data
       this.cmOptions.mode = this.file.language
-      // FIXME 这咋没有高亮？
       console.log(this.editor)
     }
     onCmCodeChange (_val:string):void {
