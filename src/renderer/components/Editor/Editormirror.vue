@@ -27,6 +27,7 @@ import 'codemirror/addon/search/searchcursor.js'
 import 'codemirror/addon/hint/show-hint.js'
 import 'codemirror/addon/hint/show-hint.css'
 import 'codemirror/addon/hint/javascript-hint.js'
+import 'codemirror/addon/hint/anyword-hint.js'
 // highlightSelectionMatches
 import 'codemirror/addon/scroll/annotatescrollbar.js'
 import 'codemirror/addon/search/matchesonscrollbar.js'
@@ -59,7 +60,7 @@ const codemirror = VueCodemirror.codemirror
   }
 })
 export default class Editormirror extends Vue {
-    file:FileContent = new FileContent('./.eslintrc.js');
+    file:FileContent = new FileContent('./test.py');
     cmOptions:any = {
       tabSize: 4,
       styleActiveLine: false,
@@ -78,7 +79,7 @@ export default class Editormirror extends Vue {
       matchBrackets: true,
       showCursorWhenSelecting: true,
       theme: 'duotone-light',
-      extraKeys: { 'Ctrl+.': 'autocomplete' }
+      extraKeys: { 'Ctrl': 'autocomplete' }
     }
     code:string='const int a;';
     get editor ():any {
