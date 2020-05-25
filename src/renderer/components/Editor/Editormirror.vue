@@ -5,7 +5,7 @@
   ref="cmEditor"
   v-model="code"
   :options="cmOptions"
-  @input="onCmCodeChange"
+  @change="onCmCodeChange"
   />
 </template>
 
@@ -77,18 +77,19 @@ export default class Editormirror extends Vue {
       matchBrackets: true,
       showCursorWhenSelecting: true,
       theme: 'duotone-light',
-      extraKeys: { 'Ctrl': 'autocomplete' }
+      extraKeys: { 'Ctrl+.': 'autocomplete' }
     }
     code:string='const int a;';
-    get codemirror ():Vue | Element | Vue[] | Element[] {
-      return this.$refs.cmEditor
+    get editor ():any {
+      let edi:any = this.$refs.cmEditor
+      return edi
     }
     mounted ():void {
-    //   this.file = new FileContent('./.eslintrc.js')
-    //   this.code = this.file.data
-    //   this.cmOptions.mode = this.file.language
+      this.file = new FileContent('./.eslintrc.js')
+      this.code = this.file.data
+      this.cmOptions.mode = this.file.language
       // FIXME 这咋没有高亮？
-      console.log(this.cmOptions)
+      console.log(this.editor)
     }
     onCmCodeChange (_val:string):void {
     //   this.code = _val
@@ -97,7 +98,6 @@ export default class Editormirror extends Vue {
 </script>
 
 <style lang='scss'>
-// @import "~@/assets/scss/code-theme/duotone-light.css";
 @import "~@/assets/scss/def.scss";
 .vue-codemirror, .CodeMirror{
     height:100%;
