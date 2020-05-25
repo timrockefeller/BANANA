@@ -4,7 +4,7 @@
     <div class="split-zip">
     <Split v-model="splitFactor">
         <div slot="left" class="split-pane">
-            <filetree></filetree>
+            <Filetree class="files"></Filetree>
         </div>
         <div slot="right" class="split-pane">
             <editormirror></editormirror>
@@ -40,7 +40,7 @@
 import {Vue, Component} from 'vue-property-decorator'
 import Editor from './Editor/Editor.vue'
 import Editormirror from './Editor/Editormirror.vue'
-import Filetree from './Filetree/Filetree.vue'
+import Filetree from './Filetree/Folder/index.vue'
 import Menubar from './Menubar/Menubar.vue'
 @Component({
   components: {Editor, Filetree, Menubar, Editormirror}
@@ -69,4 +69,8 @@ $global-split-factor : 25%;
 .ivu-split-trigger-vertical{
     opacity: 0;
 }
+.files {
+      height: calc(100% - 90px);
+      width: 320px;
+    }
 </style>
