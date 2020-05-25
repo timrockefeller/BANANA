@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: 'BANANA CODE EDITOR'
+    name: 'BANANA_CODE_EDITOR'
   }
 </script>
 

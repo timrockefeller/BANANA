@@ -1,13 +1,16 @@
 <template>
-  <div class="editor-frame">
-    <div class="text-browser" ref="innertext" @click="mouseEvent">
-      <ol><li v-for="(dat, key) in file.data" :key="key" v-html="parsetext(dat)"></li></ol>
+  <div class="editor-frame"  @keydown.tab="tabEvent">
+    <div class="text-browser" ref="innertext" contenteditable="true" @click="mouseEvent">
+      <ol class="text-inner"><li v-for="(dat, key) in file.data" :key="key">
+          <div class="line-prefix" contenteditable="false">{{key+1}}</div>
+          <div class="line-text" v-html="parsetext(dat)"></div>
+          </li></ol>
       <div 
       id="editor-inserter"
       ref="inserter"
       v-if="onfocus"
       :style="inserterStyle"
-      ></div>
+      style="display:none"></div>
     </div>
     
   </div>
@@ -20,7 +23,7 @@ import {FileContent} from '../../utils/file'
 @Component
 export default class Editor extends Vue {
   @Prop(String) name : String = 'editor-page';
-  @Prop(FileContent) file:FileContent = new FileContent('./test.py');
+  @Prop(FileContent) file:FileContent = new FileContent('./test.py', 'Big5', 'utf-8');
   inserterPosX: Number = 0;
   inserterPosY: Number = 0;
   onfocus: Boolean = true;
@@ -29,7 +32,7 @@ export default class Editor extends Vue {
     return ''
   }
   set keyput (value:String) {
-    // TODO backspace & so on
+    // T/O/D/O DEPRECATED backspace & so on
     let elInnertext: any = this.$refs.innertext
     let elInserter: any = this.$refs.inserter
     elInnertext.append(value)
@@ -41,8 +44,10 @@ export default class Editor extends Vue {
   mouseEvent (e:MouseEvent):void {
     this.inserterPosX = e.offsetX
     this.inserterPosY = Math.floor(e.offsetY / 17) * 17 + 1
-    let elInserter:any = this.$refs.inserter
-    elInserter.focus()
+  }
+  tabEvent (_e:KeyboardEvent):void {
+    let elInnertext:any = this.$refs.innertext
+    elInnertext.selectionStart = 0
   }
   parsetext (ori:string) {
     return ori.replace(/\s/g, '&nbsp;')
@@ -68,7 +73,9 @@ export default class Editor extends Vue {
   line-height: 17px;
   cursor: text;
 }
-
+.text-inner{
+    position: absolute;
+}
 #editor-inserter{
   position:relative;
   outline:none;
@@ -88,12 +95,17 @@ export default class Editor extends Vue {
 ol{
     list-style-type:none;
     counter-reset:sectioncounter;
-    padding:0 0;    
+    padding:0 0;
+    width: 100% 
 }
-
-ol li:before {
-       color:rgb(60, 61, 83);
-       content:counter(sectioncounter) " "; 
-       counter-increment:sectioncounter;
+.line-prefix{
+    display: inline-block;
+    width: 3em;
+    padding:0 2em;
+    text-align: right;
+    user-select: none;
+}
+.line-text{
+    display: inline-block;
 }
 </style>
