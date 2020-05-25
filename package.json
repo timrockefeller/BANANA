@@ -49,18 +49,21 @@
       "icon": "build/icons/icon.icns"
     },
     "win": {
-      "icon": "build/icons/icon.ico"
+      "icon": "build/icons/icon.ico",
+      "target": ["portable"]
     },
     "linux": {
       "icon": "build/icons"
     }
   },
   "dependencies": {
+    "@types/codemirror": "0.0.95",
     "axios": "^0.18.0",
     "codemirror": "^5.53.2",
     "iview": "^3.5.4",
     "vue": "^2.5.16",
     "vue-codemirror": "^4.0.6",
+    "vue-codemirror-lite": "^1.0.4",
     "vue-electron": "^1.0.6",
     "vue-property-decorator": "^8.4.2",
     "vue-router": "^3.0.1",
@@ -132,5 +135,10 @@
     "webpack-dev-server": "^3.11.0",
     "webpack-hot-middleware": "^2.22.2",
     "webpack-merge": "^4.1.3"
+  },
+  "electronWebpack": {
+    "whiteListedModules": [
+      "vue-codemirror"
+    ]
   }
 }
