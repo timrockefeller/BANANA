@@ -7,6 +7,11 @@ import store from './stores'
 import event from './utils/command'
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
+
+/**
+ *  codemirror
+ *  */
+// import CodeMirror from 'codemirror'
 import VueCodemirror from 'vue-codemirror'
 import 'codemirror/lib/codemirror.css';
 
@@ -24,7 +29,7 @@ Vue.config.productionTip = false
 Vue.use(event)
 Vue.use(iView);
 Vue.use(VueCodemirror/*,{
-    options: { theme: 'base16-dark'},
+    options: { theme: 'base16-dark', mode:'python'},
     events: ['scroll']
   }*/)
 /* eslint-disable no-new */

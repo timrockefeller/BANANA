@@ -2,11 +2,12 @@
 
 import { app, BrowserWindow, 
   Menu, 
-  //Tray, 
+  Tray
 } from 'electron'
 declare namespace global {
     let __static: string
 }
+declare var __static: string;
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
@@ -19,7 +20,18 @@ let mainWindow: BrowserWindow | null
 const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080`
   : `file://${__dirname}/index.html`
-
+  const path = require('path');
+  let tray = null;
+  function createTray(){
+      tray = new Tray(
+        path.join(__static, './icon.ico')
+      );
+    const contextMenu = Menu.buildFromTemplate([
+      { label: '退出', click:function(){app.quit()} }
+    ])
+    tray.setToolTip('BANANA')
+    tray.setContextMenu(contextMenu)
+  }  
 function createMenu() {
   if (process.platform === 'win32') {
     const menuTemplate = [{
@@ -182,8 +194,14 @@ function createWindow () {
 }
 
 app.on('ready', createWindow)
-app.on('ready', createMenu)
+app.on('ready', createTray)
+app.on('ready',createMenu)
 
+//
+
+
+
+//
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
