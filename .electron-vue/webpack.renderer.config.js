@@ -121,6 +121,12 @@ let rendererConfig = {
             name: 'fonts/[name]--[folder].[ext]'
           }
         }
+      },
+      {
+        test: /node_modules[\/\\](iconv-lite)[\/\\].+/,
+        resolve: {
+            aliasFields: ['main']
+        }
       }
     ]
   },
