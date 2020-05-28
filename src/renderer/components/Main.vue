@@ -40,7 +40,7 @@
 import {Vue, Component} from 'vue-property-decorator'
 import Editor from './Editor/Editor.vue'
 import Editormirror from './Editor/Editormirror.vue'
-import Filetree from './Filetree/Folder/index.vue'
+import Filetree from './Filetree/index.vue'
 import Menubar from './Menubar/Menubar.vue'
 @Component({
   components: {Editor, Filetree, Menubar, Editormirror}
@@ -66,11 +66,12 @@ $global-split-factor : 25%;
     height:100%;
     top:0;
 }
-.ivu-split-trigger-vertical{
-    opacity: 0;
-}
 .files {
       height: calc(100% - 90px);
       width: 320px;
     }
+.ivu-split-trigger-vertical{
+    opacity: 0;
+}
+
 </style>
