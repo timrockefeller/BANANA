@@ -11,11 +11,7 @@
         </div>
     </Split>
     </div>
-
-      <div class="footer">
-        
-      </div>
-      
+    <Statebar></Statebar>
   </main>
 </template>
 
@@ -27,6 +23,7 @@ import Filetree from './Filetree/index.vue'
 import Menubar from './Menubar/Menubar.vue'
 import * as Action from '../utils/definations/action'
 import $event from '../utils/command'
+import Statebar from './Statebar/Statebar.vue'
 const ipc = require('electron').ipcRenderer
 ipc
   .on(Action.NEWFILE,
@@ -53,7 +50,7 @@ ipc
     })
 
 @Component({
-  components: {Editor, Filetree, Menubar, Editormirror}
+  components: {Editor, Filetree, Menubar, Editormirror, Statebar}
 })
 export default class App extends Vue {
   created () {
