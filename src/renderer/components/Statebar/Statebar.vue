@@ -10,7 +10,7 @@ import * as Action from '../../utils/definations/action'
 import $event from '../../utils/command'
 @Component
 export default class Statebar extends Vue {
-  mount ():void {
+  mounted ():void {
     let that = this
     $event.bind(Action.CURSOR_ACTIVITY, function (r:number, c:number) {
       that.row = r
