@@ -63,7 +63,7 @@ export default class App extends Vue {
 $global-split-factor : 25%;
 .split-zip {
     position: absolute;
-    height: 100%;
+    height: calc(100% - 20px);
     width: 100%;
     overflow: hidden;
 }
