@@ -1,12 +1,11 @@
 declare class FileContent {
-    constructor(filePath: string, encoding_r: string, encoding_w: string);
+    constructor(filePath: string, encoding_u: string);
     onCreate(filePath: string): void;
     loadData(): void;
-    changerEncoding(encoding_r: string): void;
-    changewEncoding(encoding_w: string): void;
+    changerEncoding(encoding_u: string): void;
+    changewEncoding(encoding_u: string): void;
     path: string;
-    w_encoding: string;
-    r_encoding: string;
+    encoding: string;
     data: string;
     language: string;
     onSave(): void;

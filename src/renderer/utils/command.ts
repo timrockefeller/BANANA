@@ -2,7 +2,7 @@
 // import { INSERT }from './definatrions/action'
 interface Command {
     action: string
-    execute(_args:any): void
+    execute: Function
 }
 
 class EventBus {
@@ -10,20 +10,20 @@ class EventBus {
 
     }
     cmds: Command[] = []
-    public bind(cmd: Command): void {
-        this.cmds.push(cmd);
+    public bind(cmd: string, func: Function): void {
+        let c: Command = {
+            action: cmd,
+            execute: func
+        }
+        this.cmds.push(c);
     }
-    public trigger(action: string, ..._args:any): void {
+    public trigger(action: string, ..._args: any): void {
         for (let cmd of this.cmds) {
             if (cmd.action == action) {
-                cmd.execute(_args)
+                cmd.execute(..._args)
             }
         }
     }
 }
-export default {
-    install: function (Vue: any, _options: any) {
-        let eventbus = new EventBus()
-        Vue.prototype.$event = eventbus;
-    }
-}
+let $event: EventBus = new EventBus()
+export default $event 

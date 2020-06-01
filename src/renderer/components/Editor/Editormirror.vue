@@ -10,6 +10,7 @@
 </template>
 
 <script lang="ts">
+import $event from '../../utils/command'
 import {Vue, Component} from 'vue-property-decorator'
 import {FileContent} from '../../utils/file'
 // import base style
@@ -52,6 +53,7 @@ import 'codemirror/addon/fold/indent-fold.js'
 import 'codemirror/addon/fold/markdown-fold.js'
 import 'codemirror/addon/fold/xml-fold.js'
 
+import * as Action from '../../utils/definations/action'
 const VueCodemirror = require('@/components/vue-codemirror')
 const codemirror = VueCodemirror.codemirror
 @Component({
@@ -82,16 +84,21 @@ export default class Editormirror extends Vue {
       theme: 'duotone-light',
       extraKeys: { 'Ctrl': 'autocomplete' }
     }
-    code:string='const int a;';
+    code:string='';
     get editor ():any {
       let edi:any = this.$refs.cmEditor
       return edi.editor
     }
     mounted ():void {
-      this.file = new FileContent('./test.py', 'utf-8')
-      this.code = this.file.data
-      this.cmOptions.mode = this.file.language
+      this.code = ''
+      this.cmOptions.mode = 'text'
       console.log(this.editor)
+      let that = this
+      $event.bind(Action.IPC_OPEN_FILE_CALLBACK, function (path:string) {
+        that.file = new FileContent(path, 'utf-8')
+        that.code = that.file.data
+        that.cmOptions.mode = that.file.language
+      })
     }
     onCmCodeChange (_val:string):void {
     //   this.code = _val

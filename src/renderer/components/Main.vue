@@ -26,6 +26,7 @@ import Editormirror from './Editor/Editormirror.vue'
 import Filetree from './Filetree/index.vue'
 import Menubar from './Menubar/Menubar.vue'
 import * as Action from '../utils/definations/action'
+import $event from '../utils/command'
 const ipc = require('electron').ipcRenderer
 ipc
   .on(Action.NEWFILE,
@@ -44,6 +45,7 @@ ipc
     (_event:any, _message:any) => {
     // TODO: OPEN FILE
       let path :string = _message[0]
+      $event.trigger(Action.IPC_OPEN_FILE_CALLBACK, path)
     })
 
 @Component({

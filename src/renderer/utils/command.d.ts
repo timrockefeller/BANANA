@@ -1,4 +1,12 @@
-declare const _default: {
-    install: (Vue: any, _options: any) => void;
-};
-export default _default;
+interface Command {
+    action: string;
+    execute: Function;
+}
+declare class EventBus {
+    constructor();
+    cmds: Command[];
+    bind(cmd: string, func: Function): void;
+    trigger(action: string, ..._args: any): void;
+}
+declare let $event: EventBus;
+export default $event;
