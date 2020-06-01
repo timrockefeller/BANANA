@@ -43,7 +43,6 @@ ipc
     })
   .on(Action.IPC_OPEN_FILE_CALLBACK,
     (_event:any, _message:any) => {
-    // TODO: OPEN FILE
       let path :string = _message[0]
       $event.trigger(Action.IPC_OPEN_FILE_CALLBACK, path)
     })

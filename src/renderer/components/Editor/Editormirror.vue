@@ -94,11 +94,19 @@ export default class Editormirror extends Vue {
       this.cmOptions.mode = 'text'
       console.log(this.editor)
       let that = this
+      // 处理命令事件
+      // 打开文件
       $event.bind(Action.IPC_OPEN_FILE_CALLBACK, function (path:string) {
         that.file = new FileContent(path, 'utf-8')
         that.code = that.file.data
         that.cmOptions.mode = that.file.language
       })
+      // TODO editor命令
+      // 保存文件
+      // 另存为文件
+      // 新建文件
+      // 更改读编码
+      // 更改写编码
     }
     onCmCodeChange (_val:string):void {
     //   this.code = _val
