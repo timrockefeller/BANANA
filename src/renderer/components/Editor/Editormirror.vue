@@ -63,6 +63,7 @@ export default class Editormirror extends Vue {
     file:FileContent = new FileContent('./test.py', 'utf-8');
     cmOptions:any = {
       tabSize: 4,
+      indentUnit: 4,
       styleActiveLine: false,
       lineNumbers: true,
       styleSelectedText: false,
