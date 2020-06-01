@@ -11,26 +11,7 @@
         </div>
     </Split>
     </div>
-      <!-- <div>
-        <fieldset style="border-width: 1px; border-color: #bbbbbb; width:100%; height:220">
-          <legend>菜单栏</legend>
-          <Menubar></Menubar>
-        </fieldset>
-      </div> -->
-      <!-- <div class="box"> -->
-        <!-- <fieldset style="border-width: 1px; border-color: #bbbbbb; height:1000px;">
-          <legend>文件夹</legend> -->
-          
-        <!-- </fieldset> -->
-      <!-- </div>
-      <div class="box"> -->
-        <!-- <fieldset style="border-width: 1px; border-color: #bbbbbb;  height:1000px">
-          <legend>编辑区</legend> -->
-          
-        <!-- </fieldset> -->
-      <!-- </div>
-      
-    </div> -->
+
     
       
   </main>
