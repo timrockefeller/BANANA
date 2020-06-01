@@ -6,6 +6,7 @@
   v-model="code"
   :options="cmOptions"
   @change="onCmCodeChange"
+  @cursorActivity="onCursorChange"
   />
 </template>
 
@@ -133,6 +134,12 @@ export default class Editormirror extends Vue {
     onCmCodeChange (_val:string):void {
     //   this.code = _val
       console.log(this.editor.getValue())
+    }
+
+    onCursorChange (_val:any) {
+      let row:number = _val.doc.getCursor().line + 1
+      let col:number = _val.doc.getCursor().ch
+      $event.trigger(Action.CURSOR_ACTIVITY, row, col)
     }
 }
 </script>

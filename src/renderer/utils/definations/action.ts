@@ -15,8 +15,8 @@ export const W_ENCODE = "encode.write"
 
 // 设置文件高亮模式
 export const SETLANG = "editor.setlang"
-
-
+// 刷新行列
+export const CURSOR_ACTIVITY= "cursorActivity"
 // electron ipc trackers
 export const IPC_SAVE_FILE_DIAL = "open-save-dialog"
 export const IPC_SAVE_FILE_CALLBACK = "call-save-dialog"

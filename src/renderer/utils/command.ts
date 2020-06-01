@@ -1,4 +1,7 @@
 // import Vue from 'vue'
+
+import { CURSOR_ACTIVITY } from './definations/action';
+
 // import { INSERT }from './definatrions/action'
 interface Command {
     action: string
@@ -21,6 +24,7 @@ class EventBus {
         for (let cmd of this.cmds) {
             if (cmd.action == action) {
                 cmd.execute(..._args)
+                console.log(cmd.action + ' ' + 'use' )
             }
         }
     }
