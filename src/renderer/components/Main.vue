@@ -12,7 +12,9 @@
     </Split>
     </div>
 
-    
+      <div class="footer">
+        
+      </div>
       
   </main>
 </template>
@@ -68,6 +70,14 @@ $global-split-factor : 25%;
     height:100%;
     top:0;
 }
+.footer{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:20px;
+    z-index: 3;
+    background-color:aqua
+  }
 .files {
       height: calc(100% - 90px);
       width: 320px;

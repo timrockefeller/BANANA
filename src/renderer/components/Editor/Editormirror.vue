@@ -60,7 +60,7 @@ const codemirror = VueCodemirror.codemirror
   }
 })
 export default class Editormirror extends Vue {
-    file:FileContent = new FileContent('./test.py', 'utf-8', 'utf-8');
+    file:FileContent = new FileContent('./test.py', 'utf-8');
     cmOptions:any = {
       tabSize: 4,
       styleActiveLine: false,
@@ -87,7 +87,7 @@ export default class Editormirror extends Vue {
       return edi.editor
     }
     mounted ():void {
-      this.file = new FileContent('./test.py', 'utf-8', 'utf-8')
+      this.file = new FileContent('./test.py', 'utf-8')
       this.code = this.file.data
       this.cmOptions.mode = this.file.language
       console.log(this.editor)
