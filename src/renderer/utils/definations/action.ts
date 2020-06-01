@@ -15,3 +15,10 @@ export const W_ENCODE = "encode.write"
 
 // 设置文件高亮模式
 export const SETLANG = "editor.setlang"
+
+
+// electron ipc trackers
+export const IPC_SAVE_FILE_DIAL = "open-save-dialog"
+export const IPC_SAVE_FILE_CALLBACK = "call-save-dialog"
+export const IPC_OPEN_FILE_DIAL = "open-open-dialog"
+export const IPC_OPEN_FILE_CALLBACK = "call-open-dialog"

@@ -24,9 +24,25 @@ import Editormirror from './Editor/Editormirror.vue'
 import Filetree from './Filetree/index.vue'
 import Menubar from './Menubar/Menubar.vue'
 import * as Action from '../utils/definations/action'
-require('electron').ipcRenderer.on(Action.NEWFILE, (_event:any, _message:any) => {
-  console.log('Created New File')
-})
+const ipc = require('electron').ipcRenderer
+ipc
+  .on(Action.NEWFILE,
+    (_event:any, _message:any) => {
+      console.log('Created New File')
+    })
+  .on(Action.OPENFILE,
+    (_event:any, _message:any) => {
+      ipc.send(Action.IPC_OPEN_FILE_DIAL)
+    })
+  .on(Action.SAVEFILE,
+    (_event:any, _message:any) => {
+      ipc.send(Action.IPC_SAVE_FILE_DIAL)
+    })
+  .on(Action.IPC_OPEN_FILE_CALLBACK,
+    (_event:any, _message:any) => {
+    // TODO: OPEN FILE
+      let path :string = _message[0]
+    })
 
 @Component({
   components: {Editor, Filetree, Menubar, Editormirror}
