@@ -8,6 +8,8 @@ declare class FileContent {
     encoding: string;
     data: string;
     language: string;
+    modified: boolean;
+    setPath(filePath: string): void;
     onSave(): void;
 }
 export { FileContent };

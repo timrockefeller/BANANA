@@ -39,12 +39,17 @@ ipc
     })
   .on(Action.SAVEFILE,
     (_event:any, _message:any) => {
-      ipc.send(Action.IPC_SAVE_FILE_DIAL)
+      $event.trigger(Action.SAVEFILE)
     })
   .on(Action.IPC_OPEN_FILE_CALLBACK,
     (_event:any, _message:any) => {
       let path :string = _message[0]
       $event.trigger(Action.IPC_OPEN_FILE_CALLBACK, path)
+    })
+  .on(Action.IPC_SAVE_FILE_CALLBACK,
+    (_event:any, _message:any) => {
+      let path :string = _message
+      $event.trigger(Action.IPC_SAVE_FILE_CALLBACK, path)
     })
 
 @Component({
