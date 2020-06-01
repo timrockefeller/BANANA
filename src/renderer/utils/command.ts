@@ -2,7 +2,7 @@
 // import { INSERT }from './definatrions/action'
 interface Command {
     action: string
-    execute(): void
+    execute(_args:any): void
 }
 
 class EventBus {
@@ -13,16 +13,17 @@ class EventBus {
     public bind(cmd: Command): void {
         this.cmds.push(cmd);
     }
-    public trigger(action: string): void {
+    public trigger(action: string, ..._args:any): void {
         for (let cmd of this.cmds) {
             if (cmd.action == action) {
-                cmd.execute()
+                cmd.execute(_args)
             }
         }
     }
 }
 export default {
     install: function (Vue: any, _options: any) {
-        Vue.prototype.$event = new EventBus()
+        let eventbus = new EventBus()
+        Vue.prototype.$event = eventbus;
     }
 }

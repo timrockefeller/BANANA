@@ -42,6 +42,11 @@ import Editor from './Editor/Editor.vue'
 import Editormirror from './Editor/Editormirror.vue'
 import Filetree from './Filetree/index.vue'
 import Menubar from './Menubar/Menubar.vue'
+import * as Action from '../utils/definations/action'
+require('electron').ipcRenderer.on(Action.NEWFILE, (_event:any, _message:any) => {
+  console.log('Created New File')
+})
+
 @Component({
   components: {Editor, Filetree, Menubar, Editormirror}
 })
