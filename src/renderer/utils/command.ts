@@ -20,11 +20,10 @@ class EventBus {
         }
         this.cmds.push(c);
     }
-    public trigger(action: string, ..._args: any): void {
+    public async trigger(action: string, ..._args: any): Promise<void> {
         for (let cmd of this.cmds) {
             if (cmd.action == action) {
-                cmd.execute(..._args)
-                console.log(cmd.action + ' ' + 'use' )
+                await cmd.execute(..._args)
             }
         }
     }

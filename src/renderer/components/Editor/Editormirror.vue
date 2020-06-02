@@ -138,7 +138,7 @@ export default class Editormirror extends Vue {
 
     onCursorChange (_val:any) {
       let row:number = _val.doc.getCursor().line + 1
-      let col:number = _val.doc.getCursor().ch
+      let col:number = _val.doc.getCursor().ch + 1
       $event.trigger(Action.CURSOR_ACTIVITY, row, col)
     }
 }
