@@ -33,16 +33,16 @@ const LanguageType: any = {
     ]
 }
 const EncodeType: Array<string> = [
-    'utf-8','gbk','gb2312','gb18030','Big5','Big5-HKSCS','Shift JIS'
+    'utf-8', 'gbk', 'gb2312', 'gb18030', 'Big5', 'Big5-HKSCS', 'Shift JIS'
 ]
 class FileContent {
-    constructor(filePath: string,encoding_r: string,encoding_w: string) {
-        this.onCreate(filePath);
-        this.loadData()
-        this.changerEncoding(encoding_r)
-        this.changewEncoding(encoding_w)
-        this.w_encoding = 'utf-8'
-        this.r_encoding = 'utf-8'
+    constructor(filePath: string, encoding_u: string='utf-8') {
+        if (filePath) {
+            this.onCreate(filePath);
+            this.loadData()
+            this.changerEncoding(encoding_u)
+            this.encoding = 'utf-8'
+        }
     }
     onCreate(filePath: string) {
         this.language = LanguageType.getLang(filePath.substr(filePath.lastIndexOf('.') + 1))
@@ -51,35 +51,42 @@ class FileContent {
     }
 
     loadData() {
-       this.data = fs.readFileSync(this.path);
-       this.data = iconv.decode(this.data,this.w_encoding).toString(); // 不乱码
+        this.data = fs.readFileSync(this.path);
+        this.data = iconv.decode(this.data, this.encoding).toString(); // 不乱码
+        this.modified = true
     }
 
-    changerEncoding(encoding_r: string){
+    changerEncoding(encoding_u: string) {
         for (let Encodetype of EncodeType) {
-            if (Encodetype.localeCompare(encoding_r) === 0) {
-                this.r_encoding = encoding_r;
+            if (Encodetype.localeCompare(encoding_u) === 0) {
+                this.encoding = encoding_u;
             }
         }
     }
-    changewEncoding(encoding_w: string)
-    {    for (let Encodetype of EncodeType) {
-            if (Encodetype.localeCompare(encoding_w) === 0) {
-                this.w_encoding = encoding_w;
+    changewEncoding(encoding_u: string) {
+        for (let Encodetype of EncodeType) {
+            if (Encodetype.localeCompare(encoding_u) === 0) {
+                this.encoding = encoding_u;
             }
         }
 
     }
 
     public path: string = '';
-    public w_encoding = EncodeType[0]
-    public r_encoding = EncodeType[0]
+    public encoding = EncodeType[0]
     public data: string = '';
     public language: string = LanguageType.getLang('')
+    //TODO Show "*" on title?
+    public modified: boolean = true
+
+    setPath(filePath: string) {
+        this.language = LanguageType.getLang(filePath.substr(filePath.lastIndexOf('.') + 1))
+        this.path = pt.resolve(filePath);
+    }
 
     onSave() {
         if (this.path != null)
-            fs.writeFileSync(this.path, this.data, this.w_encoding);
+            fs.writeFileSync(this.path, this.data, this.encoding);
     }
 }
 

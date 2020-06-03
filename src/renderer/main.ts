@@ -3,8 +3,7 @@ import Vue from 'vue'
 
 import App from './App.vue'
 import router from './router'
-import store from './store'
-import event from './utils/command'
+import store from './stores'
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 
@@ -26,7 +25,6 @@ if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 // Vue.http = Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
-Vue.use(event)
 Vue.use(iView);
 Vue.use(VueCodemirror/*,{
     options: { theme: 'base16-dark', mode:'python'},

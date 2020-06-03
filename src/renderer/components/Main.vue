@@ -4,35 +4,14 @@
     <div class="split-zip">
     <Split v-model="splitFactor">
         <div slot="left" class="split-pane">
-            <filetree></filetree>
+            <Filetree class="files"></Filetree>
         </div>
         <div slot="right" class="split-pane">
             <editormirror></editormirror>
         </div>
     </Split>
     </div>
-      <!-- <div>
-        <fieldset style="border-width: 1px; border-color: #bbbbbb; width:100%; height:220">
-          <legend>菜单栏</legend>
-          <Menubar></Menubar>
-        </fieldset>
-      </div> -->
-      <!-- <div class="box"> -->
-        <!-- <fieldset style="border-width: 1px; border-color: #bbbbbb; height:1000px;">
-          <legend>文件夹</legend> -->
-          
-        <!-- </fieldset> -->
-      <!-- </div>
-      <div class="box"> -->
-        <!-- <fieldset style="border-width: 1px; border-color: #bbbbbb;  height:1000px">
-          <legend>编辑区</legend> -->
-          
-        <!-- </fieldset> -->
-      <!-- </div>
-      
-    </div> -->
-    
-      
+    <Statebar></Statebar>
   </main>
 </template>
 
@@ -40,10 +19,38 @@
 import {Vue, Component} from 'vue-property-decorator'
 import Editor from './Editor/Editor.vue'
 import Editormirror from './Editor/Editormirror.vue'
-import Filetree from './Filetree/Filetree.vue'
+import Filetree from './Filetree/index.vue'
 import Menubar from './Menubar/Menubar.vue'
+import * as Action from '../utils/definations/action'
+import $event from '../utils/command'
+import Statebar from './Statebar/Statebar.vue'
+const ipc = require('electron').ipcRenderer
+ipc
+  .on(Action.NEWFILE,
+    (_event:any, _message:any) => {
+      console.log('Created New File')
+    })
+  .on(Action.OPENFILE,
+    (_event:any, _message:any) => {
+      ipc.send(Action.IPC_OPEN_FILE_DIAL)
+    })
+  .on(Action.SAVEFILE,
+    (_event:any, _message:any) => {
+      $event.trigger(Action.SAVEFILE)
+    })
+  .on(Action.IPC_OPEN_FILE_CALLBACK,
+    (_event:any, _message:any) => {
+      let path :string = _message[0]
+      $event.trigger(Action.IPC_OPEN_FILE_CALLBACK, path)
+    })
+  .on(Action.IPC_SAVE_FILE_CALLBACK,
+    (_event:any, _message:any) => {
+      let path :string = _message
+      $event.trigger(Action.IPC_SAVE_FILE_CALLBACK, path)
+    })
+
 @Component({
-  components: {Editor, Filetree, Menubar, Editormirror}
+  components: {Editor, Filetree, Menubar, Editormirror, Statebar}
 })
 export default class App extends Vue {
   created () {
@@ -57,7 +64,7 @@ export default class App extends Vue {
 $global-split-factor : 25%;
 .split-zip {
     position: absolute;
-    height: 100%;
+    height: calc(100% - 20px);
     width: 100%;
     overflow: hidden;
 }
@@ -66,7 +73,20 @@ $global-split-factor : 25%;
     height:100%;
     top:0;
 }
+.footer{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:20px;
+    z-index: 3;
+    background-color:aqua
+  }
+.files {
+      height: calc(100% - 90px);
+      width: 320px;
+    }
 .ivu-split-trigger-vertical{
     opacity: 0;
 }
+
 </style>

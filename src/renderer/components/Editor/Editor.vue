@@ -23,7 +23,7 @@ import {FileContent} from '../../utils/file'
 @Component
 export default class Editor extends Vue {
   @Prop(String) name : String = 'editor-page';
-  @Prop(FileContent) file:FileContent = new FileContent('./test.py', 'Big5', 'utf-8');
+  @Prop(FileContent) file:FileContent = new FileContent('./test.py', 'utf-8');
   inserterPosX: Number = 0;
   inserterPosY: Number = 0;
   onfocus: Boolean = true;

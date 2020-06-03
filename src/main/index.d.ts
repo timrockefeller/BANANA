@@ -1,4 +1,4 @@
-export {};
+import './events';
 /**
  * Auto Updater
  *

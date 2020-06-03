@@ -6,10 +6,12 @@
   v-model="code"
   :options="cmOptions"
   @change="onCmCodeChange"
+  @cursorActivity="onCursorChange"
   />
 </template>
 
 <script lang="ts">
+import $event from '../../utils/command'
 import {Vue, Component} from 'vue-property-decorator'
 import {FileContent} from '../../utils/file'
 // import base style
@@ -52,17 +54,20 @@ import 'codemirror/addon/fold/indent-fold.js'
 import 'codemirror/addon/fold/markdown-fold.js'
 import 'codemirror/addon/fold/xml-fold.js'
 
+import * as Action from '../../utils/definations/action'
 const VueCodemirror = require('@/components/vue-codemirror')
 const codemirror = VueCodemirror.codemirror
+const ipc = require('electron').ipcRenderer
 @Component({
   components: {
     codemirror
   }
 })
 export default class Editormirror extends Vue {
-    file:FileContent = new FileContent('./test.py', 'utf-8', 'utf-8');
+    file:FileContent = new FileContent('');
     cmOptions:any = {
       tabSize: 4,
+      indentUnit: 4,
       styleActiveLine: false,
       lineNumbers: true,
       styleSelectedText: false,
@@ -81,19 +86,60 @@ export default class Editormirror extends Vue {
       theme: 'duotone-light',
       extraKeys: { 'Ctrl': 'autocomplete' }
     }
-    code:string='const int a;';
+    code:string='';
     get editor ():any {
       let edi:any = this.$refs.cmEditor
       return edi.editor
     }
     mounted ():void {
-      this.file = new FileContent('./test.py', 'utf-8', 'utf-8')
-      this.code = this.file.data
-      this.cmOptions.mode = this.file.language
+      this.code = ''
+      this.cmOptions.mode = 'text'
       console.log(this.editor)
+      let that = this
+      // 处理命令事件
+      // 打开文件
+      $event.bind(Action.IPC_OPEN_FILE_CALLBACK, function (path:string) {
+        if (path) {
+          that.file = new FileContent(path, 'utf-8')
+          that.code = that.file.data
+          that.cmOptions.mode = that.file.language
+        }
+      })
+      // 保存文件
+      $event.bind(Action.SAVEFILE, function () {
+        console.log(that.file.path)
+        if (that.file.path === '') {
+          $event.trigger(Action.SAVEFILEAS)
+        } else {
+          that.file.data = that.code
+          that.file.onSave()
+        }
+      })
+      // 另存为文件
+      $event.bind(Action.SAVEFILEAS, function () {
+        ipc.send(Action.IPC_SAVE_FILE_DIAL)
+      })
+      $event.bind(Action.IPC_SAVE_FILE_CALLBACK, function (filepath:string) {
+        if (filepath) {
+          that.file.setPath(filepath)
+          that.file.data = that.code
+          that.file.onSave()
+        }
+      })
+      // TODO editor命令
+      // 新建文件
+      // 更改读编码
+      // 更改写编码
     }
     onCmCodeChange (_val:string):void {
     //   this.code = _val
+      console.log(this.editor.getValue())
+    }
+
+    onCursorChange (_val:any) {
+      let row:number = _val.doc.getCursor().line + 1
+      let col:number = _val.doc.getCursor().ch + 1
+      $event.trigger(Action.CURSOR_ACTIVITY, row, col)
     }
 }
 </script>

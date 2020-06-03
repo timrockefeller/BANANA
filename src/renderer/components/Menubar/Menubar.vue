@@ -13,8 +13,7 @@ import {Vue, Component} from 'vue-property-decorator'
 
 @Component
 export default class Filetree extends Vue {
-// FIXME cannot use undo&todo from toolbar
-// FIXME cannot use select all from toolbar
+
 }
 </script>
 
