@@ -36,16 +36,20 @@ ipc
     })
   .on(Action.OPENFILE,
     (_event:any, _message:any) => {
-      ipc.send(Action.IPC_OPEN_FILE_DIAL)
+      $event.trigger(Action.OPENFILE)
     })
-  .on(Action.SAVEFILE,
+  .on(Action.IPC_CONFIRM_OPENFILE,
     (_event:any, _message:any) => {
-      $event.trigger(Action.SAVEFILE)
+      $event.trigger(Action.IPC_CONFIRM_OPENFILE, _message)
     })
   .on(Action.IPC_OPEN_FILE_CALLBACK,
     (_event:any, _message:any) => {
       let path :string = _message[0]
       $event.trigger(Action.IPC_OPEN_FILE_CALLBACK, path)
+    })
+  .on(Action.SAVEFILE,
+    (_event:any, _message:any) => {
+      $event.trigger(Action.SAVEFILE)
     })
   .on(Action.IPC_SAVE_FILE_CALLBACK,
     (_event:any, _message:any) => {

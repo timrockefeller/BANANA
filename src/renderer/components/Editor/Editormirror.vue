@@ -100,6 +100,17 @@ export default class Editormirror extends Vue {
       let that = this
       // 处理命令事件
       // 打开文件
+      $event.bind(Action.OPENFILE, function () {
+        if (that.file.modified) {
+
+        } else {
+          $event.trigger(Action.IPC_CONFIRM_OPENFILE, true)
+        }
+        ipc.send(Action.OPENFILE)
+      })
+      $event.bind(Action.IPC_CONFIRM_OPENFILE, function (rc:boolean) {
+        if (rc) ipc.send(Action.IPC_OPEN_FILE_DIAL)
+      })
       $event.bind(Action.IPC_OPEN_FILE_CALLBACK, function (path:string) {
         if (path) {
           that.file = new FileContent(path, 'utf-8')

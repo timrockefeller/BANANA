@@ -36,7 +36,7 @@ ipc.on(Action.IPC_OPEN_FILE_DIAL, function (event: IpcMessageEvent) {
     })
 })
 
-// 新建文件
+// 新建文件时的修改保存确认
 ipc.on(Action.NEWFILE, function (event: IpcMessageEvent) {
     const options: Electron.MessageBoxOptions = {
         type: 'info',
@@ -49,3 +49,15 @@ ipc.on(Action.NEWFILE, function (event: IpcMessageEvent) {
     })
 })
 
+// 打开文件时的修改保存确认
+ipc.on(Action.OPENFILE, function (event: IpcMessageEvent) {
+    const options: Electron.MessageBoxOptions = {
+        type: 'info',
+        title: '注意',
+        message: "文件未保存，是否放弃修改？",
+        buttons: ['取消', '放弃']
+    }
+    dialog.showMessageBox(options, function (index) {
+        event.sender.send(Action.IPC_CONFIRM_OPENFILE, index == 1)
+    })
+})

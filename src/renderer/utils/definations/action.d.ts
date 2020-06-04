@@ -10,5 +10,6 @@ export declare const CURSOR_ACTIVITY = "editor.cursorActivity";
 export declare const IPC_SAVE_FILE_DIAL = "ipc.open-save-dialog";
 export declare const IPC_SAVE_FILE_CALLBACK = "ipc.call-save-dialog";
 export declare const IPC_OPEN_FILE_DIAL = "ipc.open-open-dialog";
+export declare const IPC_CONFIRM_OPENFILE = "ipc.confirm-openfile";
 export declare const IPC_OPEN_FILE_CALLBACK = "ipc.call-open-dialog";
 export declare const IPC_CONFIRM_NEWFILE = "ipc.confirm-newfile";
