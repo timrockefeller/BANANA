@@ -28,7 +28,11 @@ const ipc = require('electron').ipcRenderer
 ipc
   .on(Action.NEWFILE,
     (_event:any, _message:any) => {
-      console.log('Created New File')
+      $event.trigger(Action.NEWFILE)
+    })
+  .on(Action.IPC_CONFIRM_NEWFILE,
+    (_event:any, _message:any) => {
+      $event.trigger(Action.IPC_CONFIRM_NEWFILE, _message)
     })
   .on(Action.OPENFILE,
     (_event:any, _message:any) => {

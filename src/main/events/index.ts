@@ -1,7 +1,10 @@
 const ipc = require('electron').ipcMain
+const ipcPromise = require('ipc-promise')
 const dialog = require('electron').dialog
 import * as Action from '../../renderer/utils/definations/action'
-ipc.on(Action.IPC_SAVE_FILE_DIAL, function(event:any) {
+import { IpcMessageEvent, MessageBoxOptions } from 'electron'
+
+ipc.on(Action.IPC_SAVE_FILE_DIAL, function (event: IpcMessageEvent) {
     let option: Electron.SaveDialogOptions = {
         title: '另存为',
         defaultPath: '/'
@@ -12,12 +15,12 @@ ipc.on(Action.IPC_SAVE_FILE_DIAL, function(event:any) {
         //     }
         // ]
     }
-    dialog.showSaveDialog(option, function (filename) {
-      event.sender.send(Action.IPC_SAVE_FILE_CALLBACK, filename);
+    dialog.showSaveDialog(option, function (filename: string) {
+        event.sender.send(Action.IPC_SAVE_FILE_CALLBACK, filename);
     })
 })
 
-ipc.on(Action.IPC_OPEN_FILE_DIAL, function(event:any) {
+ipc.on(Action.IPC_OPEN_FILE_DIAL, function (event: IpcMessageEvent) {
     let option: Electron.OpenDialogOptions = {
         title: '打开文件',
         defaultPath: '/'
@@ -29,6 +32,20 @@ ipc.on(Action.IPC_OPEN_FILE_DIAL, function(event:any) {
         // ]
     }
     dialog.showOpenDialog(option, function (filename) {
-      event.sender.send(Action.IPC_OPEN_FILE_CALLBACK, filename);
+        event.sender.send(Action.IPC_OPEN_FILE_CALLBACK, filename);
     })
 })
+
+// 新建文件
+ipc.on(Action.NEWFILE, function (event: IpcMessageEvent) {
+    const options: Electron.MessageBoxOptions = {
+        type: 'info',
+        title: '注意',
+        message: "文件未保存，是否放弃修改？",
+        buttons: ['取消', '放弃']
+    }
+    dialog.showMessageBox(options, function (index) {
+        event.sender.send(Action.IPC_CONFIRM_NEWFILE, index == 1)
+    })
+})
+

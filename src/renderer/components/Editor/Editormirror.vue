@@ -6,6 +6,7 @@
   v-model="code"
   :options="cmOptions"
   @change="onCmCodeChange"
+  @changes="onModify"
   @cursorActivity="onCursorChange"
   />
 </template>
@@ -55,6 +56,7 @@ import 'codemirror/addon/fold/markdown-fold.js'
 import 'codemirror/addon/fold/xml-fold.js'
 
 import * as Action from '../../utils/definations/action'
+const ipcPromise = require('ipc-promise')
 const VueCodemirror = require('@/components/vue-codemirror')
 const codemirror = VueCodemirror.codemirror
 const ipc = require('electron').ipcRenderer
@@ -128,6 +130,17 @@ export default class Editormirror extends Vue {
       })
       // TODO editor命令
       // 新建文件
+      $event.bind(Action.NEWFILE, function () {
+        if (that.file.modified === true) {
+          ipc.send(Action.NEWFILE)
+        }
+      })
+      $event.bind(Action.IPC_CONFIRM_NEWFILE, function (rc:boolean) {
+        if (rc) {
+          that.file = new FileContent('')
+          that.code = ''
+        }
+      })
       // 更改读编码
       // 更改写编码
     }
@@ -136,6 +149,9 @@ export default class Editormirror extends Vue {
       console.log(this.editor.getValue())
     }
 
+    onModify () {
+      this.file.modified = true
+    }
     onCursorChange (_val:any) {
       let row:number = _val.doc.getCursor().line + 1
       let col:number = _val.doc.getCursor().ch + 1

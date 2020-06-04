@@ -16,9 +16,11 @@ export const W_ENCODE = "encode.write"
 // 设置文件高亮模式
 export const SETLANG = "editor.setlang"
 // 刷新行列
-export const CURSOR_ACTIVITY= "cursorActivity"
+export const CURSOR_ACTIVITY = "editor.cursorActivity"
+
 // electron ipc trackers
-export const IPC_SAVE_FILE_DIAL = "open-save-dialog"
-export const IPC_SAVE_FILE_CALLBACK = "call-save-dialog"
-export const IPC_OPEN_FILE_DIAL = "open-open-dialog"
-export const IPC_OPEN_FILE_CALLBACK = "call-open-dialog"
+export const IPC_SAVE_FILE_DIAL = "ipc.open-save-dialog"
+export const IPC_SAVE_FILE_CALLBACK = "ipc.call-save-dialog"
+export const IPC_OPEN_FILE_DIAL = "ipc.open-open-dialog"
+export const IPC_OPEN_FILE_CALLBACK = "ipc.call-open-dialog"
+export const IPC_CONFIRM_NEWFILE = "ipc.confirm-newfile"

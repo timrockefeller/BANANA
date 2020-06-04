@@ -36,7 +36,7 @@ const EncodeType: Array<string> = [
     'utf-8', 'gbk', 'gb2312', 'gb18030', 'Big5', 'Big5-HKSCS', 'Shift JIS'
 ]
 class FileContent {
-    constructor(filePath: string, encoding_u: string='utf-8') {
+    constructor(filePath: string, encoding_u: string = 'utf-8') {
         if (filePath) {
             this.onCreate(filePath);
             this.loadData()
@@ -53,7 +53,7 @@ class FileContent {
     loadData() {
         this.data = fs.readFileSync(this.path);
         this.data = iconv.decode(this.data, this.encoding).toString(); // 不乱码
-        this.modified = true
+        this.modified = false
     }
 
     changerEncoding(encoding_u: string) {
@@ -77,7 +77,7 @@ class FileContent {
     public data: string = '';
     public language: string = LanguageType.getLang('')
     //TODO Show "*" on title?
-    public modified: boolean = true
+    public modified: boolean = false
 
     setPath(filePath: string) {
         this.language = LanguageType.getLang(filePath.substr(filePath.lastIndexOf('.') + 1))
@@ -85,8 +85,9 @@ class FileContent {
     }
 
     onSave() {
-        if (this.path != null)
+        if (this.modified && this.path != null)
             fs.writeFileSync(this.path, this.data, this.encoding);
+        this.modified = false
     }
 }
 
