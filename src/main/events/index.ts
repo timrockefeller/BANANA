@@ -61,3 +61,15 @@ ipc.on(Action.OPENFILE, function (event: IpcMessageEvent) {
         event.sender.send(Action.IPC_CONFIRM_OPENFILE, index == 1)
     })
 })
+
+ipc.on(Action.CHANGE_ENCODING,function (event: IpcMessageEvent) {
+    const options: Electron.MessageBoxOptions = {
+        type: 'info',
+        title: '注意',
+        message: "文件已被修改，以何种方式更改编码？",
+        buttons: ['重新加载', '通过编码保存', '取消']
+    }
+    dialog.showMessageBox(options, function (index) {
+        event.sender.send(Action.IPC_CHANGE_ENCODING_METHOD, index)
+    })
+})

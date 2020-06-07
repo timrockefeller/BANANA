@@ -14,3 +14,4 @@ export declare const IPC_OPEN_FILE_DIAL = "ipc.open-open-dialog";
 export declare const IPC_CONFIRM_OPENFILE = "ipc.confirm-openfile";
 export declare const IPC_OPEN_FILE_CALLBACK = "ipc.call-open-dialog";
 export declare const IPC_CONFIRM_NEWFILE = "ipc.confirm-newfile";
+export declare const IPC_CHANGE_ENCODING_METHOD = "ipc.changeencoding-method";

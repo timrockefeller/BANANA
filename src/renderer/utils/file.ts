@@ -50,8 +50,10 @@ class FileContent {
     }
 
     loadData() {
-        this.data = fs.readFileSync(this.path);
-        this.data = iconv.decode(this.data, this.encoding).toString(); // 不乱码
+        if (this.path) {
+            this.data = fs.readFileSync(this.path);
+            this.data = iconv.decode(this.data, this.encoding).toString(); // 不乱码
+        }
         this.modified = false
     }
 
@@ -73,7 +75,8 @@ class FileContent {
 
     onSave() {
         if (this.modified && this.path != null)
-            fs.writeFileSync(this.path, this.data, this.encoding);
+            //TODO still have error on saving
+            fs.writeFileSync(this.path, iconv.encode(this.data, this.encoding));
         this.modified = false
     }
 }

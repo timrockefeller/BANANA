@@ -56,6 +56,11 @@ ipc
       let path :string = _message
       $event.trigger(Action.IPC_SAVE_FILE_CALLBACK, path)
     })
+  .on(Action.IPC_CHANGE_ENCODING_METHOD,
+    (_event:any, _message:any) => {
+      $event.trigger(Action.IPC_CHANGE_ENCODING_METHOD, _message)
+    }
+  )
 
 @Component({
   components: {Editor, Filetree, Menubar, Editormirror, Statebar}

@@ -121,7 +121,7 @@ export default class Editormirror extends Vue {
       // 保存文件
       $event.bind(Action.SAVEFILE, function () {
         console.log(that.file.path)
-        if (that.file.modified) {
+        if (that.file.path === '') {
           $event.trigger(Action.SAVEFILEAS)
         } else {
           that.file.data = that.code
@@ -155,9 +155,25 @@ export default class Editormirror extends Vue {
       // 更改编码
       $event.bind(Action.CHANGE_ENCODING, function (_encoding:string) {
         that.file.changeEncoding(_encoding)
-        if (!(that.code.localeCompare('') === 0)) {
+        if (that.file.modified) {
+          ipc.send(Action.CHANGE_ENCODING)
+        } else {
           that.file.loadData()
           that.code = that.file.data
+        }
+      })
+      $event.bind(Action.IPC_CHANGE_ENCODING_METHOD, function (method:number) {
+        switch (method) {
+          case 0:// 重新加载
+            that.file.loadData()
+            that.code = that.file.data
+            break
+          case 1:// 通过编码保存
+            that.file.modified = true
+            that.file.onSave()
+            break
+          default:
+            break
         }
       })
     }
