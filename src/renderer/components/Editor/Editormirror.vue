@@ -156,7 +156,10 @@ export default class Editormirror extends Vue {
       // 更改编码
       $event.bind(Action.CHANGE_ENCODING, function (_encoding:string) {
         that.file.changeEncoding(_encoding)
-        console.log(_encoding)
+        if (!(that.code.localeCompare('') === 0)) {
+          that.file.loadData()
+          that.code = that.file.data
+        }
       })
     }
     onCmCodeChange (_val:string):void {
