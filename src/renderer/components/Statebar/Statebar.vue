@@ -13,7 +13,7 @@
 import {Vue, Component} from 'vue-property-decorator'
 import * as Action from '../../utils/definations/action'
 import $event from '../../utils/command'
-// import {EncodeType} from '../../utils/file'
+import {EncodeType} from '../../utils/file'
 @Component
 export default class Statebar extends Vue {
     myVal:number = 0;
