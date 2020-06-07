@@ -56,6 +56,7 @@ import 'codemirror/addon/fold/markdown-fold.js'
 import 'codemirror/addon/fold/xml-fold.js'
 
 import * as Action from '../../utils/definations/action'
+// eslint-disable-next-line no-unused-vars
 const ipcPromise = require('ipc-promise')
 const VueCodemirror = require('@/components/vue-codemirror')
 const codemirror = VueCodemirror.codemirror
@@ -152,8 +153,12 @@ export default class Editormirror extends Vue {
           that.code = ''
         }
       })
-      // 更改读编码
-      // 更改写编码
+      // 更改编码
+      $event.bind(Action.CHANGE_ENCODING, function (_encoding:string) {
+        that.file.changerEncoding(_encoding)
+        that.file.changewEncoding(_encoding)
+        console.log(_encoding)
+      })
     }
     onCmCodeChange (_val:string):void {
     //   this.code = _val

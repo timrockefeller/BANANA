@@ -40,7 +40,7 @@ class FileContent {
         if (filePath) {
             this.onCreate(filePath);
             this.loadData()
-            this.changerEncoding(encoding_u)
+         //   this.changerEncoding(encoding_u)
             this.encoding = 'utf-8'
         }
     }

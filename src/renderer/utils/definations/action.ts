@@ -17,6 +17,8 @@ export const W_ENCODE = "encode.write"
 export const SETLANG = "editor.setlang"
 // 刷新行列
 export const CURSOR_ACTIVITY = "editor.cursorActivity"
+//改变编码
+export const CHANGE_ENCODING = "change_encoding"
 
 // electron ipc trackers
 export const IPC_SAVE_FILE_DIAL = "ipc.open-save-dialog"

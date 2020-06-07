@@ -7,6 +7,7 @@ export declare const R_ENCODE = "encode.read";
 export declare const W_ENCODE = "encode.write";
 export declare const SETLANG = "editor.setlang";
 export declare const CURSOR_ACTIVITY = "editor.cursorActivity";
+export declare const CHANGE_ENCODING = "change_encoding";
 export declare const IPC_SAVE_FILE_DIAL = "ipc.open-save-dialog";
 export declare const IPC_SAVE_FILE_CALLBACK = "ipc.call-save-dialog";
 export declare const IPC_OPEN_FILE_DIAL = "ipc.open-open-dialog";
