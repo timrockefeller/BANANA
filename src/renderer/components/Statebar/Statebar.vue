@@ -17,9 +17,7 @@ import {EncodeType} from '../../utils/file'
 @Component
 export default class Statebar extends Vue {
     myVal:string = 'utf-8';
-    EncodeType: Array<string> = [
-      'utf-8', 'gbk', 'gb2312', 'gb18030', 'Big5', 'Big5-HKSCS', 'Shift JIS'
-    ]
+    EncodeType: Array<string> = EncodeType
     mounted ():void {
       let that = this
       $event.bind(Action.CURSOR_ACTIVITY, function (r:number, c:number) {
