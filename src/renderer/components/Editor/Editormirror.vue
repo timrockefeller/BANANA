@@ -103,11 +103,10 @@ export default class Editormirror extends Vue {
       // 打开文件
       $event.bind(Action.OPENFILE, function () {
         if (that.file.modified) {
-
-        } else {
           $event.trigger(Action.IPC_CONFIRM_OPENFILE, true)
+        } else {
+          ipc.send(Action.OPENFILE)
         }
-        ipc.send(Action.OPENFILE)
       })
       $event.bind(Action.IPC_CONFIRM_OPENFILE, function (rc:boolean) {
         if (rc) ipc.send(Action.IPC_OPEN_FILE_DIAL)
@@ -122,7 +121,7 @@ export default class Editormirror extends Vue {
       // 保存文件
       $event.bind(Action.SAVEFILE, function () {
         console.log(that.file.path)
-        if (that.file.path === '') {
+        if (that.file.modified) {
           $event.trigger(Action.SAVEFILEAS)
         } else {
           that.file.data = that.code
