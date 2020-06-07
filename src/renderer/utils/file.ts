@@ -78,5 +78,13 @@ class FileContent {
     }
 }
 
+// const exp = {FileContent,EncodeType}
 
-export { FileContent,EncodeType}
+export {FileContent,EncodeType}
+
+// export default exp
+// export default{
+//     data: {
+//         FileContent, EncodeType
+//     }
+// }
