@@ -114,7 +114,7 @@ export default class Editormirror extends Vue {
       })
       $event.bind(Action.IPC_OPEN_FILE_CALLBACK, function (path:string) {
         if (path) {
-          that.file = new FileContent(path, 'utf-8')
+          that.file = new FileContent(path, that.file.encoding)
           that.code = that.file.data
           that.cmOptions.mode = that.file.language
         }
@@ -155,8 +155,7 @@ export default class Editormirror extends Vue {
       })
       // 更改编码
       $event.bind(Action.CHANGE_ENCODING, function (_encoding:string) {
-        that.file.changerEncoding(_encoding)
-        that.file.changewEncoding(_encoding)
+        that.file.changeEncoding(_encoding)
         console.log(_encoding)
       })
     }

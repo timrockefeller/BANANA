@@ -39,9 +39,8 @@ class FileContent {
     constructor(filePath: string, encoding_u: string = 'utf-8') {
         if (filePath) {
             this.onCreate(filePath);
+            this.changeEncoding(encoding_u)
             this.loadData()
-         //   this.changerEncoding(encoding_u)
-            this.encoding = 'utf-8'
         }
     }
     onCreate(filePath: string) {
@@ -56,20 +55,8 @@ class FileContent {
         this.modified = false
     }
 
-    changerEncoding(encoding_u: string) {
-        for (let Encodetype of EncodeType) {
-            if (Encodetype.localeCompare(encoding_u) === 0) {
-                this.encoding = encoding_u;
-            }
-        }
-    }
-    changewEncoding(encoding_u: string) {
-        for (let Encodetype of EncodeType) {
-            if (Encodetype.localeCompare(encoding_u) === 0) {
-                this.encoding = encoding_u;
-            }
-        }
-
+    changeEncoding(encoding_u: string) {
+        this.encoding = encoding_u;
     }
 
     public path: string = '';
@@ -92,4 +79,4 @@ class FileContent {
 }
 
 
-export { FileContent }
+export { FileContent,EncodeType}

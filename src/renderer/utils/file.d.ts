@@ -1,9 +1,9 @@
+declare const EncodeType: Array<string>;
 declare class FileContent {
     constructor(filePath: string, encoding_u?: string);
     onCreate(filePath: string): void;
     loadData(): void;
-    changerEncoding(encoding_u: string): void;
-    changewEncoding(encoding_u: string): void;
+    changeEncoding(encoding_u: string): void;
     path: string;
     encoding: string;
     data: string;
@@ -12,4 +12,4 @@ declare class FileContent {
     setPath(filePath: string): void;
     onSave(): void;
 }
-export { FileContent };
+export { FileContent, EncodeType };
