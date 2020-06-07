@@ -33,12 +33,16 @@ export default class Statebar extends Vue {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import '@/assets/scss/def.scss';
 .footer{
+    font-family:$global-font;
     position:absolute;
     bottom:0;
     width:100%;
     height:20px;
     z-index: 3;
+    background-color:burlywood
   }
+
 </style>

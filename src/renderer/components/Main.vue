@@ -92,12 +92,11 @@ $global-split-factor : 25%;
     width:100%;
     height:20px;
     z-index: 3;
-    background-color:burlywood
-  }
+}
 .files {
       height: calc(100% - 90px);
       width: 320px;
-    }
+}
 .ivu-split-trigger-vertical{
     opacity: 0;
 }
