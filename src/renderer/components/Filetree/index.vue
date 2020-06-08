@@ -8,6 +8,7 @@
       <input type="text" class="search" v-model="searchInput" placeholder="Search Input...">
       <div class="content">
         <Folder v-for="(folder, index) in tree.folders" :key="index" :content="folder" :depth="0" />
+        <File ref="child" v-for="(item, index) in tree.files.concat().sort((a, b) => a.name > b.name)" :key="'file -' + index" :content="item" :depth="0" />
       </div>
     </div>
   </div>
@@ -16,19 +17,22 @@
 <script>
 import Loading from '../Loading/index.vue'
 import Folder from './Folder/index.vue'
+import File from './File/index.vue'
 import { mapGetters, mapActions } from 'vuex'
 import FileTree from '../../utils/FileTree'
-
+import $event from '../../utils/command'
+import * as Action from '../../utils/definations/action'
 export default {
   name: 'FileTree',
   components: {
     Loading,
-    Folder
+    Folder,
+    File
   },
   data () {
     return {
       searchInput: '',
-      tree: new FileTree('D:/Users/DariusYoung/Desktop/Software_Engineering_CourseDesign/test')
+      tree: new FileTree('C:\\Users\\tim72\\Desktop\\test')
     }
   },
   computed: {
@@ -40,6 +44,12 @@ export default {
   },
   methods: {
     ...mapActions('files', ['searchFile'])
+  },
+  mounted () {
+    let that = this
+    $event.bind(Action.OPENDIR, function (path) {
+      that.tree = new FileTree(path[0])
+    })
   }
 }
 </script>

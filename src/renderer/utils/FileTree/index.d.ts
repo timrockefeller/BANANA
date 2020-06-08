@@ -1,6 +1,3 @@
-/**
- * 文件结构模块
- */
 declare class FileTree {
     rmEmpty: Boolean;
     fileCount: number;
@@ -14,7 +11,8 @@ declare class FileTree {
      * 初始化文件结构
      * @param {object} options 配置参数 ()
      */
-    constructor(options: any);
+    constructor(path?: string);
+    Traverse(folder1: any, dir?: string): void;
     /**
      * 更新统计数据
      */

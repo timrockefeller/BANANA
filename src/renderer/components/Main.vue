@@ -61,6 +61,11 @@ ipc
       $event.trigger(Action.IPC_CHANGE_ENCODING_METHOD, _message)
     }
   )
+  .on(Action.OPENDIR,
+    (_event:any, _message:any) => {
+      $event.trigger(Action.OPENDIR, _message)
+    }
+  )
 
 @Component({
   components: {Editor, Filetree, Menubar, Editormirror, Statebar}
