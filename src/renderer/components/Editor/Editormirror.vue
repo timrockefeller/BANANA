@@ -17,7 +17,7 @@ import {Vue, Component} from 'vue-property-decorator'
 import {FileContent} from '../../utils/file'
 // import base style
 import 'codemirror/lib/codemirror.css'
-import 'codemirror/theme/duotone-light.css'
+import '@/assets/scss/code-theme/duotone-light.css'
 // language
 import 'codemirror/mode/javascript/javascript.js'
 import 'codemirror/mode/python/python.js'
@@ -208,6 +208,7 @@ export default class Editormirror extends Vue {
 
 <style lang='scss'>
 @import "~@/assets/scss/def.scss";
+@import "~@/assets/scss/code-theme/duotone-light.css";
 .vue-codemirror, .CodeMirror{
     height:100%;
     font-family: $global-font;
