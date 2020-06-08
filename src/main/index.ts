@@ -114,26 +114,11 @@ function createMenu() {
                 label: '删除',
                 role: 'delete'
             },
-            {
-                label: '查找...'
-
-            },
-            {
-                label: '替换...'
-            }
             ]
         },
         {
             label: '视图',
-            submenu: [{
-                label: '显示/隐藏文件导航栏'
-            },
-            {
-                label: '显示/隐藏状态栏'
-            },
-            {
-                label: '显示/隐藏工具栏'
-            },
+            submenu: [
             {
                 label: '重新载入页面',
                 role: 'reload'

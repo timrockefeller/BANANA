@@ -46,7 +46,6 @@ class FileContent {
     onCreate(filePath: string) {
         this.language = LanguageType.getLang(filePath.substr(filePath.lastIndexOf('.') + 1))
         this.path = pt.resolve(filePath);
-        // FIXME 猜测编码？
     }
 
     loadData() {
@@ -65,7 +64,6 @@ class FileContent {
     public encoding = EncodeType[0]
     public data: string = '';
     public language: string = LanguageType.getLang('')
-    //TODO Show "*" on title?
     public modified: boolean = false
 
     setPath(filePath: string) {
@@ -75,7 +73,6 @@ class FileContent {
 
     onSave() {
         if (this.modified && this.path != null)
-            //TODO still have error on saving
             fs.writeFileSync(this.path, iconv.encode(this.data, this.encoding));
         this.modified = false
     }
