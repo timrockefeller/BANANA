@@ -58,14 +58,9 @@ export default {
       }
     }
   },
-  mounted () {
-    console.log(this.content)
-  },
   methods: {
     // ...mapActions('files', ['setFile', 'setLine'])
     setFile: function (filepath) {
-      console.log(filepath)
-
       $event.trigger(Action.OPENFILE_TREE, [filepath])
     }
   }
