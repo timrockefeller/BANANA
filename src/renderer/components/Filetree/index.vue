@@ -32,7 +32,8 @@ export default {
   data () {
     return {
       searchInput: '',
-      tree: new FileTree('C:\\Users\\tim72\\Desktop\\test')
+      tree: new FileTree('D:/Users/DariusYoung/Desktop/Software_Engineering_CourseDesign/test')
+      // tree: new FileTree('../')
     }
   },
   computed: {
@@ -57,7 +58,10 @@ export default {
 <style lang="scss" scoped>
 .file-tree {
   position: relative;
-  background:dimgray;
+  font-family:Consolas, 'Courier New', monospace;
+  font-weight: bold;
+  background:#FDF6E3;
+  height: 100%;
   .file-empty {
     p {
       font-size: 14px;
@@ -72,12 +76,17 @@ export default {
     flex-direction: column;
     overflow: hidden;
     .search {
+      background:#EEE8D5 ;
       display: block;
-      flex: 0 0 40px;
+      // flex: 0 0 40px;
       padding-left: 20px;
       margin-bottom: 10px;
       font-size: 14px;
       line-height: 40px;
+      border-top:none;
+      border-left:none;
+      border-right:none;
+      outline:none;
       border-bottom: 1px solid rgba(255,255,255,0.2);
     }
     .content {

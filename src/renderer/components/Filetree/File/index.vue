@@ -71,12 +71,12 @@ export default {
 .file {
   .name {
     display: block;
-    padding: 6px;
-    height: 16px;
+    padding: 0px;
+    height: 18px;
     line-height: 16px;
-    font-size: 14px;
+    font-size: 15px;
     white-space: nowrap;
-    color: #fff;
+    color:#333333;
     font-weight: 300;
     text-decoration: none;
 
@@ -92,7 +92,7 @@ export default {
         opacity: .6;
       }
       b {
-        color: #ff6;
+        color: #FDF6E3;
         font-weight: bold;
       }
     }
@@ -114,13 +114,13 @@ export default {
     }
 
     &.active {
-      background: #333366
+      background: #333333
     }
 
     &:hover {
       .text {
         .label {
-          color: #4bd1c5;
+          color:#333333;
           opacity: 1;
         }
       }

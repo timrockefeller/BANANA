@@ -99,8 +99,8 @@ $global-split-factor : 25%;
     z-index: 3;
 }
 .files {
-      height: calc(100% - 90px);
-      width: 320px;
+      height: 100%;
+      width: 100%;
 }
 .ivu-split-trigger-vertical{
     opacity: 0;
