@@ -29,9 +29,11 @@ const LanguageType: any = {
     langPare: [
         new SuffixPare('python', 'py'),
         new SuffixPare('javascript', 'js', 'json'),
-        new SuffixPare('clike', 'cpp', 'hpp', 'c', 'h'),
+        new SuffixPare('text/x-c++src', 'cpp', 'hpp', 'c', 'h'),
+        new SuffixPare('text/x-java', 'java'),
         new SuffixPare('html', 'html', 'htm'),
-        new SuffixPare('markdown', 'md', 'txt')
+        new SuffixPare('markdown', 'md', 'txt'),
+        new SuffixPare('x-shader/x-vertex', 'vs', 'fs', 'vet', 'frg')
     ]
 }
 const EncodeType: Array<string> = [
