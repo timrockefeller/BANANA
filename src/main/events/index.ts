@@ -58,6 +58,7 @@ ipc.on(Action.OPENFILE, function (event: IpcMessageEvent) {
         buttons: ['取消', '放弃']
     }
     dialog.showMessageBox(options, function (index: number) {
+        event.sender.send(Action.IPC_CONFIRM_OPENFILE, index == 1)
     })
 })
 

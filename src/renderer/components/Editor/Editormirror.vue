@@ -6,7 +6,7 @@
   v-model="code"
   :options="cmOptions"
   @change="onCmCodeChange"
-  @keypress="onModify"
+  @inputRead="onModify"
   @cursorActivity="onCursorChange"
   />
 </template>
@@ -108,15 +108,17 @@ export default class Editormirror extends Vue {
           ipc.send(Action.OPENFILE)
         }
       })
-      $event.bind(Action.OPENFILE_TREE, function (path:string) {
-        if (that.file.modified) {
-          $event.trigger(Action.IPC_OPEN_FILE_CALLBACK, path)
-        } else {
-          ipc.send(Action.IPC_CONFIRM_OPENFILE_TREE, path)
+      $event.bind(Action.IPC_CONFIRM_OPENFILE, function (rc:boolean) {
+        if (rc) {
+          ipc.send(Action.IPC_OPEN_FILE_DIAL)
         }
       })
-      $event.bind(Action.IPC_CONFIRM_OPENFILE, function (rc:boolean) {
-        if (rc) ipc.send(Action.IPC_OPEN_FILE_DIAL)
+      $event.bind(Action.OPENFILE_TREE, function (path:string[]) {
+        if (that.file.modified) {
+          ipc.send(Action.IPC_CONFIRM_OPENFILE_TREE, path)
+        } else {
+          $event.trigger(Action.IPC_OPEN_FILE_CALLBACK, path[0])
+        }
       })
       $event.bind(Action.IPC_OPEN_FILE_CALLBACK, function (path:string) {
         if (path) {
