@@ -1,6 +1,6 @@
 <template>
   <div class="file" v-show="isShow">
-    <a href="#" class="name" :class="{ active: activeFile && activeFile.id === content.id }" :style="{ paddingLeft: (depth + 1) * 20 + 'px' }" @click.prevent="setFile(content.path.full)">
+    <a href="#" class="name" :class="{ active: activeFile && activeFile.id === content.id }" :style="{ paddingLeft: (depth + 1) * 20 + 'px' }" @click.prevent="setFile(content.Path)">
       <Icon class="icon" :extension="content.extension"/>
       <span class="text">
         <span v-for="(item, index) in nameArr.arr" :key="index"><span class="label">{{ item }}</span><b v-if="index !== nameArr.arr.length - 1">{{nameArr.keyword}}</b></span>
@@ -64,7 +64,9 @@ export default {
   methods: {
     // ...mapActions('files', ['setFile', 'setLine'])
     setFile: function (filepath) {
-      $event.trigger(Action.OPENFILE)
+      console.log(filepath)
+
+      $event.trigger(Action.OPENFILE_TREE, [filepath])
     }
   }
 }

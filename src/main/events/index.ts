@@ -62,16 +62,17 @@ ipc.on(Action.OPENFILE, function (event: IpcMessageEvent) {
 })
 
 // 从文件树打开
-ipc.on(Action.IPC_CONFIRM_OPENFILE_TREE, function (event: IpcMessageEvent) {
+ipc.on(Action.IPC_CONFIRM_OPENFILE_TREE, function (event: IpcMessageEvent,args:any) {
     const options: Electron.MessageBoxOptions = {
         type: 'info',
         title: '注意',
         message: "文件未保存，是否放弃修改？",
         buttons: ['取消', '放弃']
     }
+    console.log(args)
     dialog.showMessageBox(options, function (index: number) {
         if (index == 1)
-        event.sender.send(Action.IPC_OPEN_FILE_CALLBACK, event.args[0])
+        event.sender.send(Action.IPC_OPEN_FILE_CALLBACK, args)
     })
 })
 

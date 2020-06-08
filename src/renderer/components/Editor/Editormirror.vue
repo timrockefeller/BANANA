@@ -6,7 +6,7 @@
   v-model="code"
   :options="cmOptions"
   @change="onCmCodeChange"
-  @changes="onModify"
+  @keypress="onModify"
   @cursorActivity="onCursorChange"
   />
 </template>
@@ -123,6 +123,7 @@ export default class Editormirror extends Vue {
           that.file = new FileContent(path, that.file.encoding)
           that.code = that.file.data
           that.cmOptions.mode = that.file.language
+          that.file.modified = false
         }
       })
       // 保存文件
@@ -157,6 +158,7 @@ export default class Editormirror extends Vue {
         if (rc) {
           that.file = new FileContent('')
           that.code = ''
+          that.file.modified = false
         }
       })
       // 更改编码
@@ -167,6 +169,7 @@ export default class Editormirror extends Vue {
         } else {
           that.file.loadData()
           that.code = that.file.data
+          that.file.modified = false
         }
       })
       $event.bind(Action.IPC_CHANGE_ENCODING_METHOD, function (method:number) {
@@ -174,6 +177,7 @@ export default class Editormirror extends Vue {
           case 0:// 重新加载
             that.file.loadData()
             that.code = that.file.data
+            that.file.modified = false
             break
           case 1:// 通过编码保存
             that.file.modified = true
