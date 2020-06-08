@@ -27,13 +27,16 @@ const LanguageType: any = {
         return ''
     },
     langPare: [
-        new SuffixPare('python', 'py'),
+        new SuffixPare('python', 'py', 'pyc'),
         new SuffixPare('javascript', 'js', 'json'),
         new SuffixPare('text/x-c++src', 'cpp', 'hpp', 'c', 'h'),
         new SuffixPare('text/x-java', 'java'),
-        new SuffixPare('html', 'html', 'htm'),
+        new SuffixPare('html/text', 'html', 'htm'),
         new SuffixPare('markdown', 'md', 'txt'),
-        new SuffixPare('x-shader/x-vertex', 'vs', 'fs', 'vet', 'frg')
+        new SuffixPare('x-shader/x-vertex', 'vs', 'fs', 'vet', 'frg'),
+        new SuffixPare('htmlmixed', 'vue'),
+        new SuffixPare('text/css', 'css', 'scss'),
+        new SuffixPare('text/typescript','ts')
     ]
 }
 const EncodeType: Array<string> = [
