@@ -21,14 +21,14 @@ class FileTree {
         // this.rmEmpty = !!options.rmEmpty
 
         //this.addFolder('.', {})
-        console.log(path)
+        // console.log(path)
         this.Traverse(this, path)
-        console.log(this.folders[1])
+        // console.log(this.folders[1])
     }
 
     Traverse(folder1 : any, dir=''){
         let arr = fs.readdirSync(dir)
-        console.log(arr)
+        // console.log(arr)
         let that = this
         arr.forEach(function(item: any){
           let fullpath = path.join(dir,item)
@@ -40,9 +40,9 @@ class FileTree {
               name : item
             }
             folder1.folders.push(folder)
-            console.log('加入文件夹'+folder.name)
-            console.log('当前文件夹'+folder1.folders[0].name)
-            console.log('******')
+            // console.log('加入文件夹'+folder.name)
+            // console.log('当前文件夹'+folder1.folders[0].name)
+            // console.log('******')
             that.Traverse(folder, fullpath)
             
           }
