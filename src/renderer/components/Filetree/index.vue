@@ -1,10 +1,10 @@
 <template>
   <div class="file-tree">
     <Loading v-if="isLoading" :text="'File Loading...'"></Loading>
-    <div class="file-empty" v-if="tree.filesCount === 0">
+    <!-- <div class="file-empty" v-if="tree.filesCount === 0">
       <p>NO FILE. WAIT FOR LOADING.</p>
-    </div>
-    <div class="file-container" v-else>
+    </div> -->
+    <div class="file-container">
       <input type="text" class="search" v-model="searchInput" placeholder="Search Input...">
       <div class="content">
         <Folder v-for="(folder, index) in tree.folders" :key="index" :content="folder" :depth="0" />
@@ -17,6 +17,7 @@
 import Loading from '../Loading/index.vue'
 import Folder from './Folder/index.vue'
 import { mapGetters, mapActions } from 'vuex'
+import FileTree from '../../utils/FileTree'
 
 export default {
   name: 'FileTree',
@@ -26,12 +27,13 @@ export default {
   },
   data () {
     return {
-      searchInput: ''
+      searchInput: '',
+      tree: new FileTree('D:/Users/DariusYoung/Desktop/Software_Engineering_CourseDesign/test')
     }
   },
   computed: {
-    ...mapGetters(['isLoading']),
-    ...mapGetters('files', ['tree'])
+    ...mapGetters(['isLoading'])
+    // ...mapGetters('files', ['tree'])
   },
   watch: {
     searchInput: 'searchFile'
@@ -45,6 +47,7 @@ export default {
 <style lang="scss" scoped>
 .file-tree {
   position: relative;
+  background:dimgray;
   .file-empty {
     p {
       font-size: 14px;

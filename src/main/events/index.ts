@@ -31,8 +31,8 @@ ipc.on(Action.IPC_OPEN_FILE_DIAL, function (event: IpcMessageEvent) {
         //     }
         // ]
     }
-    dialog.showOpenDialog(option, function (filename) {
-        event.sender.send(Action.IPC_OPEN_FILE_CALLBACK, filename);
+    dialog.showOpenDialog(option, function (filename: any) {
+      event.sender.send(Action.IPC_OPEN_FILE_CALLBACK, filename);
     })
 })
 
