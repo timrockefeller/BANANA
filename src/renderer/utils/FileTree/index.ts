@@ -22,6 +22,7 @@ class FileTree {
 
         //this.addFolder('.', {})
         // console.log(path)
+        if(path)
         this.Traverse(this, path)
         // console.log(this.folders[1])
     }

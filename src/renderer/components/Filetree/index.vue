@@ -32,7 +32,7 @@ export default {
   data () {
     return {
       searchInput: '',
-      tree: new FileTree('D:/Users/DariusYoung/Desktop/Software_Engineering_CourseDesign/test')
+      tree: new FileTree('')
       // tree: new FileTree('../')
     }
   },
@@ -49,6 +49,7 @@ export default {
   mounted () {
     let that = this
     $event.bind(Action.OPENDIR, function (path) {
+      console.log(path)
       that.tree = new FileTree(path[0])
     })
   }
