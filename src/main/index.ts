@@ -102,7 +102,7 @@ function createMenu() {
             {
                 label: '另存为...',
                 click() { ipcsendMsg(Action.SAVEFILEAS) },
-                accelerator: 'CmdOrCtrl+Shift+P'
+                accelerator: 'CmdOrCtrl+Shift+S'
             },
             {
                 label: '退出',
