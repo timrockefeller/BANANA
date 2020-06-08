@@ -32,6 +32,10 @@ class FileTree {
         let that = this
         arr.forEach(function(item: any){
           let fullpath = path.join(dir,item)
+          let extensionArr = item.split(".")
+          let Extension = extensionArr[extensionArr.length-1]
+          console.log(item)
+          console.log(Extension)
           var stats = fs.statSync(fullpath)
           if(stats.isDirectory()){
             let folder = {
@@ -48,7 +52,9 @@ class FileTree {
           }
           else{
             let file = {
-              name : item
+              name : item,
+              Path : fullpath,
+              extension : Extension
             }
             folder1.files.push(file)
           } 
