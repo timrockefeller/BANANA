@@ -1,7 +1,7 @@
 import FileTree from  '../../utils/FileTree'
 
 const state:any = {
-  tree: new FileTree({ rmEmpty: true }),
+  // tree: new FileTree('.'),
   activeFile: null,
   activeIndex: 0,
   activeLine: null,
@@ -54,8 +54,8 @@ const actions = {
 
 const mutations = {
   SET_FILES (state: { tree: { addFile: (arg0: any, arg1: any) => void; getTree: (arg0: boolean) => void } }, data: any[]) {
-    state.tree = new FileTree({ rmEmpty: true })
-
+    // state.tree = new FileTree({ rmEmpty: true })
+    state.tree = new FileTree('.')
     data.length && data.map((file: { isNew: boolean; isChanged: boolean; active: boolean; path: { full: any } }, _index: any) => {
       file.isNew = false
       file.isChanged = false

@@ -38,9 +38,10 @@ function createTray() {
 }
 import * as Action from '../renderer/utils/definations/action'
 import './events'
+const dialog = require('electron').dialog
 function ipcsendMsg(_msg: string, ..._args: any) {
     if (mainWindow)
-        mainWindow.webContents.send(_msg,..._args)
+        mainWindow.webContents.send(_msg, ..._args)
 }
 function createMenu() {
     const menuTemplate = [
@@ -69,6 +70,26 @@ function createMenu() {
             {
                 label: '打开',
                 click() { ipcsendMsg(Action.OPENFILE) }
+            },
+            {
+                label: '打开文件夹',
+                click() {
+                    let option: Electron.OpenDialogOptions = {
+                        title: '打开文件',
+                        defaultPath: '/',
+                        // filters: [
+                        //     {
+                        //         name: 'Text',
+                        //         extensions: ['png', 'jpg']
+                        //     }
+                        // ]
+                        properties: ['openDirectory']
+                    }
+                    dialog.showOpenDialog(option, function (path: any) {
+                        ipcsendMsg(Action.OPENDIR, path);
+                    })
+                    
+                }
             },
             {
                 label: '保存',
@@ -185,64 +206,64 @@ function createMenu() {
     let menu = Menu.buildFromTemplate(menuTemplate)
     Menu.setApplicationMenu(menu)
 }
-function execution(languageType: string, runType: string, moduleName: string){
-  //Language refers to what lanaguage it is using(Java, Python, C++ at temporary)
-  //runType refers to complie/complie_and_run/run, initial when calling this function as static)
-  //moduleName refers to the raw name expect for the extend words. e.g. for a file name.java, the raw name is 'name.java' while module name is 'name'
-  var exec = require('child_process').exec;
-  var cmdStr = ''
-  if (languageType=='python'){
-    if (process.platform == 'darwin'){
-      cmdStr = 'python3 '+moduleName+'.py';
-    }else if (process.platform == 'win32'){
-      cmdStr = 'py -3 '+moduleName+'.py';
-    }else{
-      cmdStr = 'python '+moduleName+'.py';
+function execution(languageType: string, runType: string, moduleName: string) {
+    //Language refers to what lanaguage it is using(Java, Python, C++ at temporary)
+    //runType refers to complie/complie_and_run/run, initial when calling this function as static)
+    //moduleName refers to the raw name expect for the extend words. e.g. for a file name.java, the raw name is 'name.java' while module name is 'name'
+    var exec = require('child_process').exec;
+    var cmdStr = ''
+    if (languageType == 'python') {
+        if (process.platform == 'darwin') {
+            cmdStr = 'python3 ' + moduleName + '.py';
+        } else if (process.platform == 'win32') {
+            cmdStr = 'py -3 ' + moduleName + '.py';
+        } else {
+            cmdStr = 'python ' + moduleName + '.py';
+        }
     }
-  }
-  else if (languageType == 'java'){
-    if (runType=='compile'){
-      cmdStr = 'javac'+moduleName+'.java';
-    }else if (runType =='compile_and_run'){
-      cmdStr = 'javac'+moduleName+'.java;java'+moduleName;
-    }else{
-      cmdStr = 'java'+moduleName;
-    }
-    
-  }else if (languageType == 'cpp'){
-    if (process.platform == 'win32'){
-      if (runType=='compile_and_run'){
-        cmdStr = 'g++ '+moduleName+'.cpp;a.exe';
-      }
-      else if(runType='compile'){
-        cmdStr = 'g++ '+moduleName+'.cpp';
-      }else{
-        cmdStr = 'a.exe';
-      }
-    }else{
-      if (runType=='compile_and_run'){
-        cmdStr = 'g++ '+moduleName+'.cpp;a.out';
-      }
-      else if(runType='compile'){
-        cmdStr = 'g++ '+moduleName+'.cpp';
-      }else{
-        cmdStr = './a.out';
-      }
-    }
-      
-  }else{
-    console.log("Not Supported Language yet.")
-    return
-  }
+    else if (languageType == 'java') {
+        if (runType == 'compile') {
+            cmdStr = 'javac' + moduleName + '.java';
+        } else if (runType == 'compile_and_run') {
+            cmdStr = 'javac' + moduleName + '.java;java' + moduleName;
+        } else {
+            cmdStr = 'java' + moduleName;
+        }
 
-  exec(cmdStr, function(err: any,stdout: string,stderr: string){
-      if(err) {
-          console.log('Got ERROR:'+stderr);
-      } else {
-          var data = JSON.parse(stdout);
-          console.log(data);
-      }
-  });
+    } else if (languageType == 'cpp') {
+        if (process.platform == 'win32') {
+            if (runType == 'compile_and_run') {
+                cmdStr = 'g++ ' + moduleName + '.cpp;a.exe';
+            }
+            else if (runType = 'compile') {
+                cmdStr = 'g++ ' + moduleName + '.cpp';
+            } else {
+                cmdStr = 'a.exe';
+            }
+        } else {
+            if (runType == 'compile_and_run') {
+                cmdStr = 'g++ ' + moduleName + '.cpp;a.out';
+            }
+            else if (runType = 'compile') {
+                cmdStr = 'g++ ' + moduleName + '.cpp';
+            } else {
+                cmdStr = './a.out';
+            }
+        }
+
+    } else {
+        console.log("Not Supported Language yet.")
+        return
+    }
+
+    exec(cmdStr, function (err: any, stdout: string, stderr: string) {
+        if (err) {
+            console.log('Got ERROR:' + stderr);
+        } else {
+            var data = JSON.parse(stdout);
+            console.log(data);
+        }
+    });
 }
 function createWindow() {
     /**

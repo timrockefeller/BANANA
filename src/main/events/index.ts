@@ -31,8 +31,8 @@ ipc.on(Action.IPC_OPEN_FILE_DIAL, function (event: IpcMessageEvent) {
         //     }
         // ]
     }
-    dialog.showOpenDialog(option, function (filename) {
-        event.sender.send(Action.IPC_OPEN_FILE_CALLBACK, filename);
+    dialog.showOpenDialog(option, function (filename: any) {
+      event.sender.send(Action.IPC_OPEN_FILE_CALLBACK, filename);
     })
 })
 
@@ -44,7 +44,7 @@ ipc.on(Action.NEWFILE, function (event: IpcMessageEvent) {
         message: "文件未保存，是否放弃修改？",
         buttons: ['取消', '放弃']
     }
-    dialog.showMessageBox(options, function (index) {
+    dialog.showMessageBox(options, function (index: number) {
         event.sender.send(Action.IPC_CONFIRM_NEWFILE, index == 1)
     })
 })
@@ -57,7 +57,7 @@ ipc.on(Action.OPENFILE, function (event: IpcMessageEvent) {
         message: "文件未保存，是否放弃修改？",
         buttons: ['取消', '放弃']
     }
-    dialog.showMessageBox(options, function (index) {
+    dialog.showMessageBox(options, function (index: number) {
         event.sender.send(Action.IPC_CONFIRM_OPENFILE, index == 1)
     })
 })
@@ -69,7 +69,7 @@ ipc.on(Action.CHANGE_ENCODING,function (event: IpcMessageEvent) {
         message: "文件已被修改，以何种方式更改编码？",
         buttons: ['重新加载', '通过编码保存', '取消']
     }
-    dialog.showMessageBox(options, function (index) {
+    dialog.showMessageBox(options, function (index: any) {
         event.sender.send(Action.IPC_CHANGE_ENCODING_METHOD, index)
     })
 })

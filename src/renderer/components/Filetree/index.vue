@@ -1,13 +1,14 @@
 <template>
   <div class="file-tree">
     <Loading v-if="isLoading" :text="'File Loading...'"></Loading>
-    <div class="file-empty" v-if="tree.filesCount === 0">
+    <!-- <div class="file-empty" v-if="tree.filesCount === 0">
       <p>NO FILE. WAIT FOR LOADING.</p>
-    </div>
-    <div class="file-container" v-else>
+    </div> -->
+    <div class="file-container">
       <input type="text" class="search" v-model="searchInput" placeholder="Search Input...">
       <div class="content">
         <Folder v-for="(folder, index) in tree.folders" :key="index" :content="folder" :depth="0" />
+        <File ref="child" v-for="(item, index) in tree.files.concat().sort((a, b) => a.name > b.name)" :key="'file -' + index" :content="item" :depth="0" />
       </div>
     </div>
   </div>
@@ -16,28 +17,39 @@
 <script>
 import Loading from '../Loading/index.vue'
 import Folder from './Folder/index.vue'
+import File from './File/index.vue'
 import { mapGetters, mapActions } from 'vuex'
-
+import FileTree from '../../utils/FileTree'
+import $event from '../../utils/command'
+import * as Action from '../../utils/definations/action'
 export default {
   name: 'FileTree',
   components: {
     Loading,
-    Folder
+    Folder,
+    File
   },
   data () {
     return {
-      searchInput: ''
+      searchInput: '',
+      tree: new FileTree('C:\\Users\\tim72\\Desktop\\test')
     }
   },
   computed: {
-    ...mapGetters(['isLoading']),
-    ...mapGetters('files', ['tree'])
+    ...mapGetters(['isLoading'])
+    // ...mapGetters('files', ['tree'])
   },
   watch: {
     searchInput: 'searchFile'
   },
   methods: {
     ...mapActions('files', ['searchFile'])
+  },
+  mounted () {
+    let that = this
+    $event.bind(Action.OPENDIR, function (path) {
+      that.tree = new FileTree(path[0])
+    })
   }
 }
 </script>
@@ -45,6 +57,7 @@ export default {
 <style lang="scss" scoped>
 .file-tree {
   position: relative;
+  background:dimgray;
   .file-empty {
     p {
       font-size: 14px;

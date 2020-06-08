@@ -1,7 +1,8 @@
 /**
  * 文件结构模块
  */
-
+var fs = require("fs")
+var path = require("path")
 class FileTree {
     rmEmpty: Boolean = false
     fileCount = 0
@@ -16,11 +17,43 @@ class FileTree {
      * 初始化文件结构
      * @param {object} options 配置参数 ()
      */
-    constructor(options :any) {
-        this.rmEmpty = !!options.rmEmpty
+    constructor(path ='') {
+        // this.rmEmpty = !!options.rmEmpty
 
-        this.addFolder('.', {})
+        //this.addFolder('.', {})
+        // console.log(path)
+        this.Traverse(this, path)
+        // console.log(this.folders[1])
     }
+
+    Traverse(folder1 : any, dir=''){
+        let arr = fs.readdirSync(dir)
+        // console.log(arr)
+        let that = this
+        arr.forEach(function(item: any){
+          let fullpath = path.join(dir,item)
+          var stats = fs.statSync(fullpath)
+          if(stats.isDirectory()){
+            let folder = {
+              folders : [],
+              files : [],
+              name : item
+            }
+            folder1.folders.push(folder)
+            // console.log('加入文件夹'+folder.name)
+            // console.log('当前文件夹'+folder1.folders[0].name)
+            // console.log('******')
+            that.Traverse(folder, fullpath)
+            
+          }
+          else{
+            let file = {
+              name : item
+            }
+            folder1.files.push(file)
+          } 
+        })
+      }
 
     /**
      * 更新统计数据
@@ -92,7 +125,7 @@ class FileTree {
 
         let folders:any = this.folders
         let folder
-
+        
         // 按照路径层层迭代, 在最后一层迭代时增加文件夹
         pathArr.map((item: any) => {
             let find:any = folders.find((folder: { name: any }) => item === folder.name)
