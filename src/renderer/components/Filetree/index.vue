@@ -49,8 +49,10 @@ export default {
   mounted () {
     let that = this
     $event.bind(Action.OPENDIR, function (path) {
-      console.log(path)
       that.tree = new FileTree(path[0])
+    })
+    $event.bind(Action.REFRESHDIR, function () {
+      that.tree.Traverse()
     })
   }
 }
