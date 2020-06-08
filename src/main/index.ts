@@ -65,11 +65,13 @@ function createMenu() {
             label: '文件',
             submenu: [{
                 label: '新建',
-                click() { ipcsendMsg(Action.NEWFILE) }
+                click() { ipcsendMsg(Action.NEWFILE) },
+                accelerator: 'CmdOrCtrl+N'
             },
             {
                 label: '打开',
-                click() { ipcsendMsg(Action.OPENFILE) }
+                click() { ipcsendMsg(Action.OPENFILE) },
+                accelerator: 'CmdOrCtrl+O'
             },
             {
                 label: '打开文件夹',
@@ -89,15 +91,18 @@ function createMenu() {
                         ipcsendMsg(Action.OPENDIR, path);
                     })
                     
-                }
+                },
+                accelerator: 'CmdOrCtrl+Shift+O'
             },
             {
                 label: '保存',
-                click() { ipcsendMsg(Action.SAVEFILE) }
+                click() { ipcsendMsg(Action.SAVEFILE) },
+                accelerator: 'CmdOrCtrl+S'
             },
             {
                 label: '另存为...',
-                click() { ipcsendMsg(Action.SAVEFILEAS) }
+                click() { ipcsendMsg(Action.SAVEFILEAS) },
+                accelerator: 'CmdOrCtrl+Shift+P'
             },
             {
                 label: '退出',

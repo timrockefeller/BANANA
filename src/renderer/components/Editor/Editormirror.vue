@@ -91,7 +91,7 @@ export default class Editormirror extends Vue {
       matchBrackets: true,
       showCursorWhenSelecting: true,
       theme: 'solarized light', // 'duotone-light',
-      extraKeys: { 'Ctrl': 'autocomplete' }
+      extraKeys: { 'Alt': 'autocomplete' }
     }
     code:string='';
     get editor ():any {
@@ -158,6 +158,8 @@ export default class Editormirror extends Vue {
       $event.bind(Action.NEWFILE, function () {
         if (that.file.modified === true) {
           ipc.send(Action.NEWFILE)
+        } else {
+          $event.trigger(Action.IPC_CONFIRM_NEWFILE, true)
         }
       })
       $event.bind(Action.IPC_CONFIRM_NEWFILE, function (rc:boolean) {
