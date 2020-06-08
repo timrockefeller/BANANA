@@ -1,6 +1,6 @@
 <template>
   <div class="file" v-show="isShow">
-    <a href="#" class="name" :class="{ active: activeFile && activeFile.id === content.id }" :style="{ paddingLeft: (depth + 1) * 20 + 'px' }" @click.prevent="setFile(content.path.full), setLine(null)">
+    <a href="#" class="name" :class="{ active: activeFile && activeFile.id === content.id }" :style="{ paddingLeft: (depth + 1) * 20 + 'px' }" @click.prevent="setFile(content.path.full)">
       <Icon class="icon" :extension="content.extension"/>
       <span class="text">
         <span v-for="(item, index) in nameArr.arr" :key="index"><span class="label">{{ item }}</span><b v-if="index !== nameArr.arr.length - 1">{{nameArr.keyword}}</b></span>
@@ -13,8 +13,10 @@
 
 <script>
 import Icon from '../Icon/index.vue'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 
+import $event from '../../../utils/command'
+import * as Action from '../../../utils/definations/action'
 export default {
   name: 'File',
   components: {
@@ -56,8 +58,14 @@ export default {
       }
     }
   },
+  mounted () {
+    console.log(this.content)
+  },
   methods: {
-    ...mapActions('files', ['setFile', 'setLine'])
+    // ...mapActions('files', ['setFile', 'setLine'])
+    setFile: function (filepath) {
+      $event.trigger(Action.OPENFILE)
+    }
   }
 }
 </script>

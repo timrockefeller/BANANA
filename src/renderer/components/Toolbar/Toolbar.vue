@@ -1,6 +1,5 @@
 <template>
   <div>
-      <!-- TODO编码、语言类型 -->
   </div>
 </template>
 
