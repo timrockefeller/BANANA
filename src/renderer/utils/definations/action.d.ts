@@ -2,6 +2,7 @@ export declare const NEWFILE = "editor.newfile";
 export declare const OPENFILE = "editor.open";
 export declare const OPENFILE_TREE = "editor.openfromtree";
 export declare const OPENDIR = "editor.opendir";
+export declare const REFRESHDIR = "editor.refreshdir";
 export declare const SAVEFILE = "editor.save";
 export declare const SAVEFILEAS = "editor.saveas";
 export declare const R_ENCODE = "encode.read";

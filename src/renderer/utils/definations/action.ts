@@ -5,6 +5,8 @@ export const OPENFILE = "editor.open"
 export const OPENFILE_TREE = 'editor.openfromtree'
 // 打开文件夹
 export const OPENDIR = "editor.opendir"
+// 刷新文件夹
+export const REFRESHDIR = "editor.refreshdir"
 // 保存文件
 export const SAVEFILE = "editor.save"
 export const SAVEFILEAS = "editor.saveas"

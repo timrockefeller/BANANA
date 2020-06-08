@@ -151,6 +151,7 @@ export default class Editormirror extends Vue {
           that.file.setPath(filepath)
           that.file.data = that.code
           that.file.onSave()
+          $event.trigger(Action.REFRESHDIR)
         }
       })
       // TODO editor命令
