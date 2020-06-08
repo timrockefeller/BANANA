@@ -18,9 +18,13 @@ import {FileContent} from '../../utils/file'
 // import base style
 import 'codemirror/lib/codemirror.css'
 import '@/assets/scss/code-theme/duotone-light.css'
+import 'codemirror/theme/solarized.css'
 // language
 import 'codemirror/mode/javascript/javascript.js'
 import 'codemirror/mode/python/python.js'
+import 'codemirror/mode/clike/clike.js'
+import 'codemirror/mode/markdown/markdown.js'
+import 'codemirror/mode/htmlmixed/htmlmixed.js'
 // require active-line.js
 import 'codemirror/addon/selection/active-line.js'
 // styleSelectedText
@@ -30,6 +34,7 @@ import 'codemirror/addon/search/searchcursor.js'
 import 'codemirror/addon/hint/show-hint.js'
 import 'codemirror/addon/hint/show-hint.css'
 import 'codemirror/addon/hint/javascript-hint.js'
+import 'codemirror/addon/hint/html-hint.js'
 import 'codemirror/addon/hint/anyword-hint.js'
 // highlightSelectionMatches
 import 'codemirror/addon/scroll/annotatescrollbar.js'
@@ -37,7 +42,6 @@ import 'codemirror/addon/search/matchesonscrollbar.js'
 
 import 'codemirror/addon/search/match-highlighter.js'
 // keyMap
-import 'codemirror/mode/clike/clike.js'
 import 'codemirror/addon/edit/matchbrackets.js'
 import 'codemirror/addon/comment/comment.js'
 import 'codemirror/addon/dialog/dialog.js'
@@ -86,7 +90,7 @@ export default class Editormirror extends Vue {
       },
       matchBrackets: true,
       showCursorWhenSelecting: true,
-      theme: 'duotone-light',
+      theme: 'solarized light', // 'duotone-light',
       extraKeys: { 'Ctrl': 'autocomplete' }
     }
     code:string='';
