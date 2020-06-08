@@ -1,5 +1,6 @@
 export declare const NEWFILE = "editor.newfile";
 export declare const OPENFILE = "editor.open";
+export declare const OPENFILE_TREE = "editor.openfromtree";
 export declare const OPENDIR = "editor.opendir";
 export declare const SAVEFILE = "editor.save";
 export declare const SAVEFILEAS = "editor.saveas";
@@ -15,3 +16,4 @@ export declare const IPC_CONFIRM_OPENFILE = "ipc.confirm-openfile";
 export declare const IPC_OPEN_FILE_CALLBACK = "ipc.call-open-dialog";
 export declare const IPC_CONFIRM_NEWFILE = "ipc.confirm-newfile";
 export declare const IPC_CHANGE_ENCODING_METHOD = "ipc.changeencoding-method";
+export declare const IPC_CONFIRM_OPENFILE_TREE = "ipc.confirm-openfromtree";

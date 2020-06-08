@@ -108,6 +108,13 @@ export default class Editormirror extends Vue {
           ipc.send(Action.OPENFILE)
         }
       })
+      $event.bind(Action.OPENFILE_TREE, function (path:string) {
+        if (that.file.modified) {
+          $event.trigger(Action.IPC_OPEN_FILE_CALLBACK, path)
+        } else {
+          ipc.send(Action.IPC_CONFIRM_OPENFILE_TREE, path)
+        }
+      })
       $event.bind(Action.IPC_CONFIRM_OPENFILE, function (rc:boolean) {
         if (rc) ipc.send(Action.IPC_OPEN_FILE_DIAL)
       })

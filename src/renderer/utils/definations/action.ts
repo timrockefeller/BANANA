@@ -2,6 +2,7 @@
 export const NEWFILE = "editor.newfile"
 // 打开单个文件
 export const OPENFILE = "editor.open"
+export const OPENFILE_TREE = 'editor.openfromtree'
 // 打开文件夹
 export const OPENDIR = "editor.opendir"
 // 保存文件
@@ -28,3 +29,4 @@ export const IPC_CONFIRM_OPENFILE = "ipc.confirm-openfile"
 export const IPC_OPEN_FILE_CALLBACK = "ipc.call-open-dialog"
 export const IPC_CONFIRM_NEWFILE = "ipc.confirm-newfile"
 export const IPC_CHANGE_ENCODING_METHOD = "ipc.changeencoding-method"
+export const IPC_CONFIRM_OPENFILE_TREE = "ipc.confirm-openfromtree"
