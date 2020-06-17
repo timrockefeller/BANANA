@@ -46,7 +46,8 @@
       ]
     },
     "mac": {
-      "icon": "build/icons/icon.icns"
+      "icon": "build/icons/icon.icns",
+      "target": "pkg"
     },
     "win": {
       "icon": "build/icons/icon.ico",
@@ -64,6 +65,7 @@
     "codemirror": "^5.53.2",
     "ipc-promise": "^0.1.4",
     "iview": "^3.5.4",
+    "node-cmd": "^3.0.0",
     "vue": "^2.5.16",
     "vue-codemirror": "^4.0.6",
     "vue-codemirror-lite": "^1.0.4",
