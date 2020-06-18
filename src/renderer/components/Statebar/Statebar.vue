@@ -42,7 +42,8 @@ export default class Statebar extends Vue {
     width:100%;
     height:20px;
     z-index: 3;
-    background-color:burlywood
+    background-color:#EEE8D5;
+    text-align: right;
   }
 
 </style>
