@@ -136,9 +136,6 @@ export default {
     this.term.prompt = () => {
       this.term.write('\r\n$ ')
     }
-    this.term.writeln('Welcome to xterm.js')
-    this.term.writeln('This is a local terminal emulation, without a real terminal in the back-end.')
-    this.term.writeln('Type some keys and commands to play around.')
     this.term.writeln('')
     this.term.prompt()
     // キー入力
@@ -224,7 +221,13 @@ export default {
 </script>
 
 
-<style lang="stylus">
+<style>
+.console {
+    width: 500px;
+    height: 100px;
+    border: 0.5px solid burlywood;
+    z-index:10
+}
 </style>
 <!--
 <style lang="stylus" scoped>
