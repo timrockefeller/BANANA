@@ -35,7 +35,6 @@ import {Vue, Component} from 'vue-property-decorator'
 import Editor from './Editor/Editor.vue'
 import Editormirror from './Editor/Editormirror.vue'
 import Filetree from './Filetree/index.vue'
-import Menubar from './Menubar/Menubar.vue'
 import * as Action from '../utils/definations/action'
 import $event from '../utils/command'
 import Statebar from './Statebar/Statebar.vue'
@@ -91,7 +90,11 @@ ipc
   .send('asynchronous-message', 'ping')
 
 @Component({
+<<<<<<< HEAD
   components: {Editor, Filetree, Menubar, Editormirror, Statebar, TerminalView}
+=======
+  components: {Editor, Filetree, Editormirror, Statebar}
+>>>>>>> dev_editor
 })
 export default class App extends Vue {
   created () {
