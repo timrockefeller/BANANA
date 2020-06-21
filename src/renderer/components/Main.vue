@@ -1,20 +1,7 @@
 <template>
   <main>
     <!-- Menu Bar -->
-     <TerminalView
-          class = 'test'
-          ref="terminal"
-          :terminal="terminal"
-          :cols="100"
-          :rows="24"
-          auto-size
-          :options="{
-            scrollback: 5000,
-            disableStdin: true,
-            useFlowControl: true
-          }"
-          open-links
-        />
+     
         
     <div class="split-zip">
     <Split v-model="splitFactor">
@@ -27,6 +14,21 @@
     </Split>
     </div>
     <Statebar></Statebar>
+    <TerminalView
+          class = 'test'
+          ref="terminal"
+          :terminal="terminal"
+          :cols="100"
+          :rows="24"
+          auto-size
+          :options="{
+            scrollback: 5000,
+            disableStdin: true,
+            useFlowControl: true
+          }"
+          open-links
+          
+        />
   </main>
 </template>
 
