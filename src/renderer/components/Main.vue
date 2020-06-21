@@ -1,11 +1,22 @@
 <template>
   <main>
     <!-- Menu Bar -->
-     <TerminalView
+
+    <div class="split-zip">
+    <Split v-model="splitFactor">
+        <div slot="left" class="split-pane">
+            <Filetree class="files"></Filetree>
+        </div>
+        <div slot="right" class="split-pane">
+           <div slot="top" class="split-pane">
+                 <editormirror></editormirror>
+            </div>
+            <div slot="bottom" class="demo-split-pane">
+                 <TerminalView
           class = 'test'
           ref="terminal"
           :terminal="terminal"
-          :cols="100"
+          :cols="110"
           :rows="24"
           auto-size
           :options="{
@@ -15,19 +26,13 @@
           }"
           open-links
         />
-        
-    <div class="split-zip">
-    <Split v-model="splitFactor">
-        <div slot="left" class="split-pane">
-            <Filetree class="files"></Filetree>
-        </div>
-        <div slot="right" class="split-pane">
-            <editormirror></editormirror>
+            </div>
         </div>
     </Split>
     </div>
     <Statebar></Statebar>
   </main>
+  
 </template>
 
 <script lang="ts">
@@ -143,5 +148,15 @@ $global-split-factor : 25%;
 .ivu-split-trigger-vertical{
     opacity: 0;
 }
-
+.demo-split{
+        height: 200px;
+        border: 1px solid #dcdee2;
+}
+.demo-split-pane{
+      position:absolute;
+      bottom:0;
+      width:100%;
+      height:100px;
+      z-index: 3;
+}
 </style>
