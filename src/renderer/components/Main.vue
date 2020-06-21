@@ -1,6 +1,21 @@
 <template>
   <main>
     <!-- Menu Bar -->
+     <TerminalView
+          class = 'test'
+          ref="terminal"
+          :terminal="terminal"
+          :cols="100"
+          :rows="24"
+          auto-size
+          :options="{
+            scrollback: 5000,
+            disableStdin: true,
+            useFlowControl: true
+          }"
+          open-links
+        />
+        
     <div class="split-zip">
     <Split v-model="splitFactor">
         <div slot="left" class="split-pane">
@@ -24,6 +39,7 @@ import Menubar from './Menubar/Menubar.vue'
 import * as Action from '../utils/definations/action'
 import $event from '../utils/command'
 import Statebar from './Statebar/Statebar.vue'
+import TerminalView from '../components/Terminal/Terminal.vue'
 const ipc = require('electron').ipcRenderer
 ipc
   .on(Action.NEWFILE,
@@ -66,20 +82,42 @@ ipc
       $event.trigger(Action.OPENDIR, _message)
     }
   )
+  .on('asynchronous-reply', (event: any, arg: any) => {
+    console.log(arg) // prints "pong"
+  })
+  .on('terminal', (event: any, arg: any) => {
+    console.log(arg) // prints "pong"
+  })
+  .send('asynchronous-message', 'ping')
 
 @Component({
-  components: {Editor, Filetree, Menubar, Editormirror, Statebar}
+  components: {Editor, Filetree, Menubar, Editormirror, Statebar, TerminalView}
 })
 export default class App extends Vue {
   created () {
   }
   name:string= 'top'
   splitFactor:Number = 0.25
+  data () {
+    return {
+      terminal: {
+        pid: 1,
+        name: 'terminal',
+        cols: 1000,
+        rows: 1000
+      }
+
+    }
+  }
 }
 </script>
 
+
 <style lang="scss">
 $global-split-factor : 25%;
+.test {
+  z-index: 10;
+}
 .split-zip {
     position: absolute;
     height: calc(100% - 20px);

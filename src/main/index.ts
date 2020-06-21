@@ -1,15 +1,17 @@
 'use strict'
 
 import {
-    app, BrowserWindow,
-    Menu,
-    Tray
+    app, BrowserWindow,Menu,
+    Tray,
+    ipcMain
 } from 'electron'
 declare namespace global {
     let __static: string
 }
 declare var __static: string;
 const isMac = process.platform === 'darwin'
+const execa = require('execa');
+const iconv = require("iconv-lite");
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
@@ -17,7 +19,6 @@ const isMac = process.platform === 'darwin'
 if (process.env.NODE_ENV !== 'development') {
     global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
 }
-
 let mainWindow: BrowserWindow | null
 const winURL = process.env.NODE_ENV === 'development'
     ? `http://localhost:9080`
@@ -211,65 +212,6 @@ function createMenu() {
     let menu = Menu.buildFromTemplate(menuTemplate)
     Menu.setApplicationMenu(menu)
 }
-function execution(languageType: string, runType: string, moduleName: string) {
-    //Language refers to what lanaguage it is using(Java, Python, C++ at temporary)
-    //runType refers to complie/complie_and_run/run, initial when calling this function as static)
-    //moduleName refers to the raw name expect for the extend words. e.g. for a file name.java, the raw name is 'name.java' while module name is 'name'
-    var exec = require('child_process').exec;
-    var cmdStr = ''
-    if (languageType == 'python') {
-        if (process.platform == 'darwin') {
-            cmdStr = 'python3 ' + moduleName + '.py';
-        } else if (process.platform == 'win32') {
-            cmdStr = 'py -3 ' + moduleName + '.py';
-        } else {
-            cmdStr = 'python ' + moduleName + '.py';
-        }
-    }
-    else if (languageType == 'java') {
-        if (runType == 'compile') {
-            cmdStr = 'javac' + moduleName + '.java';
-        } else if (runType == 'compile_and_run') {
-            cmdStr = 'javac' + moduleName + '.java;java' + moduleName;
-        } else {
-            cmdStr = 'java' + moduleName;
-        }
-
-    } else if (languageType == 'cpp') {
-        if (process.platform == 'win32') {
-            if (runType == 'compile_and_run') {
-                cmdStr = 'g++ ' + moduleName + '.cpp;a.exe';
-            }
-            else if (runType = 'compile') {
-                cmdStr = 'g++ ' + moduleName + '.cpp';
-            } else {
-                cmdStr = 'a.exe';
-            }
-        } else {
-            if (runType == 'compile_and_run') {
-                cmdStr = 'g++ ' + moduleName + '.cpp;a.out';
-            }
-            else if (runType = 'compile') {
-                cmdStr = 'g++ ' + moduleName + '.cpp';
-            } else {
-                cmdStr = './a.out';
-            }
-        }
-
-    } else {
-        console.log("Not Supported Language yet.")
-        return
-    }
-
-    exec(cmdStr, function (err: any, stdout: string, stderr: string) {
-        if (err) {
-            console.log('Got ERROR:' + stderr);
-        } else {
-            var data = JSON.parse(stdout);
-            console.log(data);
-        }
-    });
-}
 function createWindow() {
     /**
      * Initial window options
@@ -285,6 +227,46 @@ function createWindow() {
         mainWindow = null
     })
     // createMenu();
+    mainWindow.webContents.on('did-finish-load', () => {
+        let command = "cmd";
+        let args: never[] = [];
+    
+        // console.log("env:"+JSON.stringify(process.env));
+        console.log("path:"+path.dirname(__dirname));
+    
+    
+        process = execa(command, args, {
+              cwd: path.dirname(__dirname),//__dirname,
+              stdio: ['pipe', 'pipe', 'pipe'],
+              //shell: true,
+              env: process.env,
+            })
+    
+        process.stdout.on('data', (buffer: { toString: () => any; }) => {
+          if (process.platform === 'win32') {
+              buffer = iconv.decode(buffer, "windows-31j");
+          }
+          console.log(buffer.toString());
+          if(mainWindow!=null)
+          mainWindow.webContents.send('terminal', buffer.toString());
+        })
+    
+        process.stderr.on('data', (buffer: { toString: () => any; }) => {
+          if (process.platform === 'win32') {
+              buffer = iconv.decode(buffer, "windows-31j");
+          }
+          console.log(buffer.toString());
+          if(mainWindow!=null)
+          mainWindow.webContents.send('terminal', buffer.toString());
+        })
+    
+        //win.webContents.send('terminal', "process.env:"+JSON.stringify(process.env));
+        if(mainWindow!=null)
+        mainWindow.webContents.send('terminal', "__dirname:"+__dirname);
+    
+      });
+    
+    
 }
 
 app.on('ready', createWindow)
@@ -308,7 +290,30 @@ app.on('activate', () => {
     }
 })
 
-
+ipcMain.on('terminal', (event: any, arg: string) => {
+    console.log(arg);
+    let _ev = JSON.parse(arg);
+    process.stdout.write(_ev.key);
+    //event.reply('terminal', 'pong')
+    process.stdin.write(_ev.key);
+    if (_ev.key === "\r") {
+      process.stdin.write("\n");
+      console.log('pid:'+ process.pid)
+      //child.stdin.end();
+    }
+  
+  })
+  
+  
+  ipcMain.on('asynchronous-message', (event: { reply: (arg0: string, arg1: string) => void; }, arg: any) => {
+    console.log(arg) // prints "ping"
+    event.reply('terminal', 'pong')
+  })
+  
+  ipcMain.on('synchronous-message', (event: { returnValue: string; }, arg: any) => {
+    console.log(arg) // prints "ping"
+    event.returnValue = 'pong'
+  })
 
 /**
  * Auto Updater
